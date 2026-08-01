@@ -1,0 +1,17 @@
+{
+  "name": "桑怡工作台 · SANGYI",
+  "short_name": "桑怡工作台",
+  "description": "桑怡 SANGYI 外贸业务工作台：客户 CRM、网站优化（ChatGPT）、展会管理、外贸知识库。",
+  "lang": "zh-CN",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f1f8fe",
+  "theme_color": "#89cff0",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

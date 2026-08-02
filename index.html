@@ -2125,8 +2125,15 @@
   loadZohoConfig();
   loadData();
 
-  /* ---- PWA Service Worker：一次性移除，避免任何缓存导致数据不刷新 ---- */
+  /* ---- PWA Service Worker：新 worker 接管时自动刷新一次 + 旧 worker 一次性注销 ---- */
   if ('serviceWorker' in navigator){
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      // sessionStorage 跨刷新持久化，仅放行一次刷新，避免注销引发的循环刷新
+      if (!sessionStorage.getItem('swReloaded')) {
+        sessionStorage.setItem('swReloaded', '1');
+        location.reload();
+      }
+    });
     navigator.serviceWorker.getRegistrations()
       .then(regs => regs.forEach(r => r.unregister()))
       .catch(() => {});

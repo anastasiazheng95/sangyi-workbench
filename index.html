@@ -2125,15 +2125,11 @@
   loadZohoConfig();
   loadData();
 
-  /* ---- PWA Service Worker ---- */
+  /* ---- PWA Service Worker：一次性移除，避免任何缓存导致数据不刷新 ---- */
   if ('serviceWorker' in navigator){
-    let swReloading = false;
-    navigator.serviceWorker.addEventListener('controllerchange', () => {
-      if (swReloading) return;
-      swReloading = true;
-      location.reload();
-    });
-    window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(e => console.warn('SW 注册失败', e)));
+    navigator.serviceWorker.getRegistrations()
+      .then(regs => regs.forEach(r => r.unregister()))
+      .catch(() => {});
   }
 </script>
 <nav class="bottom-nav" id="bottomNav"></nav>

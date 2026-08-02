@@ -1,5 +1,5 @@
 {
-  "_说明": "桑怡工作台真实业务数据。改本文件并推送到 GitHub 即自动更新首页（无需改代码）。金额单位 USD，留 null 时表格显示 —。customers 为客户主数据（CRM 表 + 开发中心共用），status 可选 NEW(新客户)/FREE(潜在)/7-24(跟进中)/DEAL(成交)/LEAD(询盘)/SAMPLE(样品)；orders 为订单列表；expo.costs 为展会费用。国家由客户编号前缀推断：RU=俄罗斯 / CO=哥伦比亚 / CR=哥斯达黎加。",
+  "_说明": "桑怡工作台真实业务数据。改本文件并推送到 GitHub 即自动更新首页（无需改代码）。金额单位 USD（PI 原值，币种已核对为美元，部分定金以 ¥ 记录仅为收款通道）。customers 为客户主数据，status 可选 NEW/FREE/7-24/DEAL/LEAD/SAMPLE；orders 为订单列表（amount 为各订单最终 PI 总额）。国家由客户编号前缀推断：RU=俄罗斯 / CO=哥伦比亚 / CR=哥斯达黎加。",
   "updatedAt": "2026-08-02",
   "metrics": {
     "newCustomers": 0,
@@ -62,24 +62,24 @@
     }
   ],
   "orders": [
-    { "no": "RU-291-1", "customer": "Stais-Alexander", "product": "玻璃烟斗", "qty": "—", "amount": null, "status": "已发货", "cls": "7-24", "date": "2023-05-19" },
-    { "no": "RU-291-2", "customer": "Stais-Alexander", "product": "金属烟斗", "qty": "—", "amount": null, "status": "已发货", "cls": "7-24", "date": "" },
-    { "no": "RU-291-3", "customer": "Stais-Alexander", "product": "第三单", "qty": "—", "amount": null, "status": "已发货", "cls": "7-24", "date": "" },
-    { "no": "RU-291-4", "customer": "Stais-Alexander", "product": "第四单", "qty": "—", "amount": null, "status": "已发货", "cls": "7-24", "date": "" },
-    { "no": "RU-291-5", "customer": "Stais-Alexander", "product": "第五单", "qty": "—", "amount": null, "status": "已发货", "cls": "7-24", "date": "" },
+    { "no": "RU-291-1", "customer": "Stais-Alexander", "product": "玻璃烟斗", "qty": "—", "amount": 311544, "status": "已发货", "cls": "7-24", "date": "2023-05-19" },
+    { "no": "RU-291-2", "customer": "Stais-Alexander", "product": "金属烟斗", "qty": "—", "amount": 340018, "status": "已发货", "cls": "7-24", "date": "" },
+    { "no": "RU-291-3", "customer": "Stais-Alexander", "product": "第三单", "qty": "—", "amount": 205720, "status": "已发货", "cls": "7-24", "date": "" },
+    { "no": "RU-291-4", "customer": "Stais-Alexander", "product": "第四单", "qty": "—", "amount": 405844, "status": "已发货", "cls": "7-24", "date": "" },
+    { "no": "RU-291-5", "customer": "Stais-Alexander", "product": "第五单", "qty": "—", "amount": 690235, "status": "已发货", "cls": "7-24", "date": "" },
 
-    { "no": "CR-248-1", "customer": "Juan", "product": "玻璃烟斗", "qty": "—", "amount": null, "status": "已发货", "cls": "7-24", "date": "2020" },
-    { "no": "CR-248-2", "customer": "Juan", "product": "玻璃烟斗", "qty": "—", "amount": null, "status": "已发货", "cls": "7-24", "date": "" },
-    { "no": "CR-248-3", "customer": "Juan", "product": "玻璃烟斗", "qty": "—", "amount": null, "status": "已发货", "cls": "7-24", "date": "2021-04-28" },
-    { "no": "CR-248-4", "customer": "Juan", "product": "玻璃烟斗", "qty": "—", "amount": null, "status": "已发货", "cls": "7-24", "date": "2022-03-18" },
-    { "no": "CR-248-5", "customer": "Juan", "product": "玻璃烟斗", "qty": "—", "amount": null, "status": "已发货", "cls": "7-24", "date": "2023-08-19" },
-    { "no": "CR-248-6", "customer": "Juan", "product": "玻璃烟斗", "qty": "—", "amount": null, "status": "已发货", "cls": "7-24", "date": "2025-03-22" },
+    { "no": "CR-248-1", "customer": "Juan", "product": "玻璃烟斗", "qty": "—", "amount": 25156, "status": "已发货", "cls": "7-24", "date": "2020" },
+    { "no": "CR-248-2", "customer": "Juan", "product": "玻璃烟斗", "qty": "—", "amount": 5760, "status": "已发货", "cls": "7-24", "date": "" },
+    { "no": "CR-248-3", "customer": "Juan", "product": "玻璃烟斗", "qty": "—", "amount": 42234, "status": "已发货", "cls": "7-24", "date": "2021-04-28" },
+    { "no": "CR-248-4", "customer": "Juan", "product": "玻璃烟斗", "qty": "—", "amount": 56952, "status": "已发货", "cls": "7-24", "date": "2022-03-18" },
+    { "no": "CR-248-5", "customer": "Juan", "product": "玻璃烟斗", "qty": "—", "amount": 9166, "status": "已发货", "cls": "7-24", "date": "2023-08-19" },
+    { "no": "CR-248-6", "customer": "Juan", "product": "玻璃烟斗", "qty": "—", "amount": 56455, "status": "已发货", "cls": "7-24", "date": "2025-03-22" },
 
-    { "no": "CO-246-1", "customer": "RAUL", "product": "玻璃烟斗 / 研磨器", "qty": "—", "amount": null, "status": "已发货", "cls": "7-24", "date": "" },
-    { "no": "CO-246-2", "customer": "RAUL", "product": "blunt cigars", "qty": "—", "amount": null, "status": "已发货", "cls": "7-24", "date": "" },
-    { "no": "CO-246-3", "customer": "RAUL", "product": "样品单", "qty": "—", "amount": null, "status": "样品", "cls": "NEW", "date": "" },
-    { "no": "CO-246-4", "customer": "RAUL", "product": "巴拿马渠道", "qty": "—", "amount": null, "status": "已发货", "cls": "7-24", "date": "" },
-    { "no": "CO-246-5", "customer": "RAUL", "product": "玻璃烟斗", "qty": "—", "amount": null, "status": "已发货", "cls": "7-24", "date": "2025-08-20" },
+    { "no": "CO-246-1", "customer": "RAUL", "product": "玻璃烟斗 / 研磨器", "qty": "—", "amount": 11654, "status": "已发货", "cls": "7-24", "date": "" },
+    { "no": "CO-246-2", "customer": "RAUL", "product": "blunt cigars", "qty": "—", "amount": 11616, "status": "已发货", "cls": "7-24", "date": "" },
+    { "no": "CO-246-3", "customer": "RAUL", "product": "样品单", "qty": "—", "amount": 2378, "status": "样品", "cls": "NEW", "date": "" },
+    { "no": "CO-246-4", "customer": "RAUL", "product": "巴拿马渠道", "qty": "—", "amount": 80188, "status": "已发货", "cls": "7-24", "date": "" },
+    { "no": "CO-246-5", "customer": "RAUL", "product": "玻璃烟斗", "qty": "—", "amount": 18761, "status": "已发货", "cls": "7-24", "date": "2025-08-20" },
     { "no": "CO-246-6", "customer": "RAUL", "product": "玻璃烟斗 / 研磨器", "qty": "—", "amount": null, "status": "询盘", "cls": "LEAD", "date": "2025-07-05" }
   ],
   "zoho": {

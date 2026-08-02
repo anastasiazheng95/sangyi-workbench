@@ -2,11 +2,11 @@
   "_说明": "桑怡工作台真实业务数据。改本文件并推送到 GitHub 即自动更新首页（无需改代码）。金额单位 USD（PI 原值，币种已核对为美元，部分定金以 ¥ 记录仅为收款通道）。customers 为客户主数据，status 可选 NEW/FREE/7-24/DEAL/LEAD/SAMPLE；orders 为订单列表（amount 为各订单最终 PI 总额）。国家由客户编号前缀推断：RU=俄罗斯 / CO=哥伦比亚 / CR=哥斯达黎加。",
   "updatedAt": "2026-08-02",
   "metrics": {
-    "newCustomers": 0,
-    "newQuotes": 0,
+    "newCustomers": 3,
+    "newQuotes": 17,
     "messages": 0,
     "followups": 3,
-    "newOrders": 0,
+    "newOrders": 16,
     "amount": 0
   },
   "today": [],
@@ -168,7 +168,7 @@
       "amount": 205720,
       "status": "已发货",
       "cls": "7-24",
-      "date": "",
+      "date": "2024-08-27",
       "currency": "CNY"
     },
     {
@@ -179,7 +179,7 @@
       "amount": 405844,
       "status": "已发货",
       "cls": "7-24",
-      "date": "",
+      "date": "2025-06-19",
       "currency": "CNY"
     },
     {
@@ -190,7 +190,7 @@
       "amount": 690235,
       "status": "已发货",
       "cls": "7-24",
-      "date": "",
+      "date": "2026-04-01",
       "currency": "CNY"
     },
     {
@@ -212,7 +212,7 @@
       "amount": 5760,
       "status": "已发货",
       "cls": "7-24",
-      "date": "",
+      "date": "2021-01-10",
       "currency": "USD"
     },
     {
@@ -267,7 +267,7 @@
       "amount": 11654,
       "status": "已发货",
       "cls": "7-24",
-      "date": "",
+      "date": "2020-08-13",
       "currency": "USD"
     },
     {
@@ -278,7 +278,7 @@
       "amount": 11616,
       "status": "已发货",
       "cls": "7-24",
-      "date": "",
+      "date": "2020-06-19",
       "currency": "USD"
     },
     {
@@ -289,7 +289,7 @@
       "amount": 2378,
       "status": "样品",
       "cls": "NEW",
-      "date": "",
+      "date": "2020-06-01",
       "currency": "USD"
     },
     {
@@ -300,7 +300,7 @@
       "amount": 80188,
       "status": "已发货",
       "cls": "7-24",
-      "date": "",
+      "date": "2020-09-07",
       "currency": "USD"
     },
     {
@@ -322,7 +322,7 @@
       "amount": null,
       "status": "询盘",
       "cls": "LEAD",
-      "date": "2025-07-05",
+      "date": "2020-07-05",
       "currency": "USD"
     }
   ],

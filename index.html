@@ -1072,13 +1072,7 @@
           <thead>
             <tr><th>订单号</th><th>客户</th><th>产品</th><th>数量</th><th>金额</th><th>状态</th><th>下单日期</th></tr>
           </thead>
-          <tbody>
-            <tr><td>#PO-2026-0731</td><td>ABC Home Supplies Inc.</td><td>烟斗</td><td>500 pcs</td><td>$2,840</td><td><span class="status-badge status-NEW">已下单</span></td><td>2026-07-31</td></tr>
-            <tr><td>#PO-2026-0730</td><td>Beng Trading GmbH</td><td>磨烟器</td><td>1,000 pcs</td><td>$3,200</td><td><span class="status-badge status-FREE">生产中</span></td><td>2026-07-30</td></tr>
-            <tr><td>#PO-2026-0728</td><td>Sunshine Retail Ltd.</td><td>水烟</td><td>300 pcs</td><td>$1,860</td><td><span class="status-badge status-7-24">已发货</span></td><td>2026-07-28</td></tr>
-            <tr><td>#PO-2026-0725</td><td>Korea HomeStyle</td><td>磨烟器</td><td>800 pcs</td><td>$2,560</td><td><span class="status-badge status-FREE">生产中</span></td><td>2026-07-25</td></tr>
-            <tr><td>#PO-2026-0722</td><td>Tokyo Living Co.</td><td>水烟</td><td>50 pcs</td><td>$320</td><td><span class="status-badge status-NEW">样品</span></td><td>2026-07-22</td></tr>
-          </tbody>
+          <tbody id="ordersBody"></tbody>
         </table>
       </section>
 
@@ -1102,16 +1096,7 @@
           <div class="progress-card">
             <table class="expo-cost">
               <thead><tr><th>费用项目</th><th>预估金额</th><th>状态</th></tr></thead>
-              <tbody>
-                <tr><td>展位费 Booth</td><td>—</td><td>待估算</td></tr>
-                <tr><td>机票 Flights</td><td>—</td><td>待估算</td></tr>
-                <tr><td>酒店 Hotel</td><td>—</td><td>待估算</td></tr>
-                <tr><td>签证 Visa</td><td>—</td><td>待估算</td></tr>
-                <tr><td>驾照翻译认证</td><td>—</td><td>待估算</td></tr>
-                <tr><td>租车 Car Rental</td><td>—</td><td>待估算</td></tr>
-                <tr><td>样品运输 Shipping</td><td>—</td><td>待估算</td></tr>
-                <tr><td>餐饮 / 当地交通</td><td>—</td><td>待估算</td></tr>
-              </tbody>
+                <tbody id="expoCostBody"></tbody>
             </table>
             <div class="expo-cost-total">合计预估：<b>—</b>（填好各项后自动汇总）</div>
           </div>
@@ -1377,8 +1362,21 @@
   /* ============================================================
      Render tables / cards
      ============================================================ */
+  const STATUS_MAP = {
+    'NEW':   ['新客户','NEW'],
+    'FREE':  ['潜在客户','FREE'],
+    '7-24':  ['跟进中','7-24'],
+    'DEAL':  ['成交','NEW'],
+    'LEAD':  ['询盘','FREE'],
+    'SAMPLE':['样品','7-24'],
+  };
+  function statusBadge(s){
+    const m = STATUS_MAP[s] || [s||'未知','UNKNOWN'];
+    return '<span class="status-badge status-'+m[1]+'">'+m[0]+'</span>';
+  }
   function renderCRM(){
-    const html = crmData.map(r => `
+    const list = (window.SANGYI_DATA && window.SANGYI_DATA.customers && window.SANGYI_DATA.customers.length) ? window.SANGYI_DATA.customers : crmData;
+    const html = list.map(r => `
       <tr>
         <td><b>${r.name}</b></td>
         <td><span class="country-flag">${r.flag} ${r.country}</span></td>
@@ -1386,7 +1384,7 @@
         <td>${r.source}</td>
         <td>${r.contact}</td>
         <td>${r.product}</td>
-        <td><span class="status-badge status-${r.status}">${r.status === 'NEW' ? 'NEW' : r.status === 'FREE' ? 'FREE' : r.status === '7-24' ? '7-24' : 'UNKNOWN'}</span></td>
+        <td>${statusBadge(r.status)}</td>
         <td>${r.date}</td>
         <td>
           <div class="row-actions">
@@ -1401,22 +1399,23 @@
   }
 
   function renderDev(){
-    const html = devData.map(c => `
+    const list = (window.SANGYI_DATA && window.SANGYI_DATA.customers && window.SANGYI_DATA.customers.length) ? window.SANGYI_DATA.customers : devData;
+    const html = list.map(c => `
       <div class="dev-card">
         <div class="dev-card-head">
-          <div class="dev-name">${c.name} <span class="badge-tag">${c.tag}</span></div>
-          <div class="dev-meta">${c.country}</div>
+          <div class="dev-name">${c.name} <span class="badge-tag">${c.tag||''}</span></div>
+          <div class="dev-meta">${c.country||''}</div>
         </div>
         <div class="dev-divider"></div>
-        <div class="dev-row"><span class="k">地址</span><span class="v">${c.address}</span></div>
-        <div class="dev-row"><span class="k">电话</span><span class="v">${c.phone}</span></div>
-        <div class="dev-row"><span class="k">邮箱</span><span class="v">${c.email}</span></div>
-        <div class="dev-row"><span class="k">行业分类</span><span class="v">${c.industry}</span></div>
-        <div class="dev-row"><span class="k">买家类型</span><span class="v">${c.buyerType}</span></div>
-        <div class="dev-row"><span class="k">买家行为</span><span class="v">${c.buyerBehavior}</span></div>
+        <div class="dev-row"><span class="k">地址</span><span class="v">${c.address||'—'}</span></div>
+        <div class="dev-row"><span class="k">电话</span><span class="v">${c.phone||'—'}</span></div>
+        <div class="dev-row"><span class="k">邮箱</span><span class="v">${c.email||'—'}</span></div>
+        <div class="dev-row"><span class="k">行业分类</span><span class="v">${c.industry||'—'}</span></div>
+        <div class="dev-row"><span class="k">买家类型</span><span class="v">${c.buyerType||'—'}</span></div>
+        <div class="dev-row"><span class="k">买家行为</span><span class="v">${c.buyerBehavior||'—'}</span></div>
         <div class="dev-row">
           <span class="k">关系标签</span>
-          <span class="v"><div class="dev-tags">${c.tags.map(t=>`<span class="dev-tag">${t}</span>`).join('')}</div></span>
+          <span class="v"><div class="dev-tags">${(c.tags||[]).map(t=>`<span class="dev-tag">${t}</span>`).join('')}</div></span>
         </div>
         <div style="display:flex;gap:8px;margin-top:14px;justify-content:flex-end">
           <button class="btn btn-light btn-sm">查看邮件</button>
@@ -1428,6 +1427,51 @@
     document.getElementById('devBody').innerHTML = html;
   }
 
+
+  /* ---- 订单 / 展会费用：数据源 data.json（留空时兜底演示数据） ---- */
+  const DEMO_ORDERS = [
+    { no:'#PO-2026-0731', customer:'ABC Home Supplies Inc.', product:'烟斗', qty:'500 pcs', amount:2840, status:'已下单', cls:'NEW', date:'2026-07-31' },
+    { no:'#PO-2026-0730', customer:'Beng Trading GmbH', product:'磨烟器', qty:'1,000 pcs', amount:3200, status:'生产中', cls:'FREE', date:'2026-07-30' },
+    { no:'#PO-2026-0728', customer:'Sunshine Retail Ltd.', product:'水烟', qty:'300 pcs', amount:1860, status:'已发货', cls:'7-24', date:'2026-07-28' },
+    { no:'#PO-2026-0725', customer:'Korea HomeStyle', product:'磨烟器', qty:'800 pcs', amount:2560, status:'生产中', cls:'FREE', date:'2026-07-25' },
+    { no:'#PO-2026-0722', customer:'Tokyo Living Co.', product:'水烟', qty:'50 pcs', amount:320, status:'样品', cls:'NEW', date:'2026-07-22' },
+  ];
+  const DEMO_COSTS = [
+    { name:'展位费 Booth', amount:null, note:'待估算' },
+    { name:'机票 Flights', amount:null, note:'待估算' },
+    { name:'酒店 Hotel', amount:null, note:'待估算' },
+    { name:'签证 Visa', amount:null, note:'待估算' },
+    { name:'驾照翻译认证', amount:null, note:'待估算' },
+    { name:'租车 Car Rental', amount:null, note:'待估算' },
+    { name:'样品运输 Shipping', amount:null, note:'待估算' },
+    { name:'餐饮 / 当地交通', amount:null, note:'待估算' },
+  ];
+  function renderOrders(){
+    const list = (window.SANGYI_DATA && window.SANGYI_DATA.orders && window.SANGYI_DATA.orders.length) ? window.SANGYI_DATA.orders : DEMO_ORDERS;
+    const html = list.map(o => `
+      <tr>
+        <td>${o.no}</td>
+        <td><b>${o.customer}</b></td>
+        <td>${o.product}</td>
+        <td>${o.qty}</td>
+        <td>$${Number(o.amount).toLocaleString('en-US')}</td>
+        <td><span class="status-badge status-${o.cls||'NEW'}">${o.status}</span></td>
+        <td>${o.date}</td>
+      </tr>`).join('');
+    const tb = document.getElementById('ordersBody');
+    if(tb) tb.innerHTML = html;
+  }
+  function renderExpoCost(){
+    const e = (window.SANGYI_DATA && window.SANGYI_DATA.expo) || {};
+    const list = (e.costs && e.costs.length) ? e.costs : DEMO_COSTS;
+    const html = list.map(c => `
+      <tr><td>${c.name}</td><td>${c.amount!=null ? '$'+Number(c.amount).toLocaleString('en-US') : '—'}</td><td>${c.note||'待估算'}</td></tr>`).join('');
+    const tb = document.getElementById('expoCostBody');
+    if(tb) tb.innerHTML = html;
+    const total = list.reduce((s,c)=> s + (Number(c.amount)||0), 0);
+    const totEl = document.getElementById('expoCostTotal');
+    if(totEl) totEl.innerHTML = '合计预估：<b>' + (total ? '$'+total.toLocaleString('en-US') : '—') + '</b>（填好各项后自动汇总）';
+  }
 
   /* ============================================================
      Navigation & modal
@@ -1879,6 +1923,10 @@
         updateWaEngine();
         renderExpoCard(document.getElementById('expoCard'));
         renderExpoCard(document.getElementById('homeExpo'));
+        renderCRM();
+        renderDev();
+        renderOrders();
+        renderExpoCost();
       });
   }
 
@@ -1887,6 +1935,8 @@
      ============================================================ */
   renderCRM();
   renderDev();
+  renderOrders();
+  renderExpoCost();
   renderOptSteps();
   initPlan();
   loadOptConfig();

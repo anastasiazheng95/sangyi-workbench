@@ -804,33 +804,33 @@
           <div class="metric c-blue">
             <div class="metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M16 5.2a3 3 0 0 1 0 5.6"/><path d="M17.5 14a5.5 5.5 0 0 1 3 5.2"/></svg></div>
             <div class="metric-label">新客户</div>
-            <div class="metric-value">—</div>
+            <div class="metric-value" id="mv-newCustomers">—</div>
           </div>
           <div class="metric c-green">
             <div class="metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 12h6M9 16h4"/></svg></div>
             <div class="metric-label">新报价</div>
-            <div class="metric-value">—</div>
+            <div class="metric-value" id="mv-newQuotes">—</div>
           </div>
           <div class="metric c-yellow clickable" onclick="openZohoPanel()">
             <div class="metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8 8 0 0 1-11.6 7.1L4 20l1.4-5.4A8 8 0 1 1 21 11.5Z"/></svg></div>
             <div class="metric-label">客户留言</div>
-            <div class="metric-value">—</div>
+            <div class="metric-value" id="mv-messages">—</div>
             <div class="metric-badge zoho-engine" id="zohoEngine"><span class="plug-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6M7 8h10v3a5 5 0 0 1-5 5 5 5 0 0 1-5-5V8Z"/><path d="M12 16v6M8 22h8"/></svg></span><span class="ze-text">Zoho · 待接入</span></div>
           </div>
           <div class="metric c-orange">
             <div class="metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 2"/></svg></div>
             <div class="metric-label">等待跟进</div>
-            <div class="metric-value">—</div>
+            <div class="metric-value" id="mv-followups">—</div>
           </div>
           <div class="metric c-pink">
             <div class="metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/><path d="M3 4h2l2.2 11h10l1.8-8H6.2"/></svg></div>
             <div class="metric-label">新订单</div>
-            <div class="metric-value">—</div>
+            <div class="metric-value" id="mv-newOrders">—</div>
           </div>
           <div class="metric c-purple">
             <div class="metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18"/><circle cx="16.5" cy="14.5" r="1.2"/></svg></div>
             <div class="metric-label">成交金额</div>
-            <div class="metric-value">—</div>
+            <div class="metric-value" id="mv-amount">—</div>
           </div>
         </div>
 
@@ -841,10 +841,7 @@
               <div class="panel-link" onclick="goPage('crm')">+ 添加客户</div>
             </div>
             <div class="panel-body">
-              <div class="empty-state compact">
-                <p>暂无今日动态 · 添加真实客户与询盘后自动展示</p>
-                <button class="btn btn-primary btn-sm" onclick="goPage('crm')">＋ 添加客户</button>
-              </div>
+              <div id="todayList"></div>
             </div>
           </div>
 
@@ -854,9 +851,7 @@
               <div class="panel-link">全部 ›</div>
             </div>
             <div class="panel-body">
-              <div class="empty-state compact">
-                <p>暂无活跃动态 · 业务数据将在此实时更新</p>
-              </div>
+              <div id="recentList"></div>
             </div>
           </div>
         </div>
@@ -1745,8 +1740,8 @@
     updateOverall();
   }
 
-  /* ---- 展会筹备进度（首页 + 展会页共用单一数据源） ---- */
-  const expoData = {
+  /* ---- 真实数据单一来源：优先读 data.json，缺失时回退 FALLBACK ---- */
+  const FALLBACK_EXPO = {
     name: 'Intertabac',
     badge: '已确认',
     meta: '📍 德国 · 多特蒙德 Westfalenhallen ｜ 📅 2026-09-15 ~ 2026-09-17 ｜ 🌐 全球最大烟草及烟具展',
@@ -1766,16 +1761,21 @@
       { name:'现场执行方案', status:'todo' }
     ]
   };
-  function expoCountdown(){
-    const start = new Date(expoData.start + 'T00:00:00');
+  const DEFAULT_DATA = {
+    metrics: { newCustomers:0, newQuotes:0, messages:0, followups:0, newOrders:0, amount:0 },
+    today: [], recent: [], expo: FALLBACK_EXPO, zoho: { messages: [] }
+  };
+  function expoCountdown(startStr){
+    const start = new Date(startStr + 'T00:00:00');
     const today = new Date();
     const d = Math.ceil((start - today) / 86400000);
     return d > 0 ? d : 0;
   }
   function renderExpoCard(el){
     if(!el) return;
-    const days = expoCountdown();
-    const tasksHtml = expoData.tasks.map(t => {
+    const e = (window.SANGYI_DATA && window.SANGYI_DATA.expo) || FALLBACK_EXPO;
+    const days = expoCountdown(e.start);
+    const tasksHtml = (e.tasks||[]).map(t => {
       const cls  = t.status==='done' ? 'done' : t.status==='run' ? 'run' : '';
       const mark = t.status==='done' ? '✓' : t.status==='run' ? '●' : '○';
       const label= t.status==='done' ? '已完成' : t.status==='run' ? '进行中' : '待开始';
@@ -1784,8 +1784,8 @@
     el.innerHTML = `
       <div class="expo-head">
         <div>
-          <div class="expo-name">${expoData.name} <span class="expo-badge">${expoData.badge}</span></div>
-          <div class="expo-meta">${expoData.meta}</div>
+          <div class="expo-name">${e.name} <span class="expo-badge">${e.badge}</span></div>
+          <div class="expo-meta">${e.meta}</div>
         </div>
         <div class="expo-count">
           <div class="expo-count-num">${days}</div>
@@ -1795,11 +1795,52 @@
       <div class="expo-progress">
         <div class="progress-head">
           <div class="progress-title">筹备进度</div>
-          <div class="progress-pct">${expoData.progress}%</div>
+          <div class="progress-pct">${e.progress}%</div>
         </div>
-        <div class="progress-track"><div class="progress-fill" style="width:${expoData.progress}%"></div></div>
+        <div class="progress-track"><div class="progress-fill" style="width:${e.progress}%"></div></div>
       </div>
       <ul class="expo-tasks">${tasksHtml}</ul>`;
+  }
+  /* ---- 首页数据渲染（指标 + 动态），数据源 data.json ---- */
+  function setText(id, v){ const el = document.getElementById(id); if(el) el.textContent = v; }
+  function renderActivities(containerId, items){
+    const el = document.getElementById(containerId);
+    if(!el) return;
+    if(!items || !items.length){
+      el.innerHTML = '<div class="empty-state compact"><p>暂无动态 · 添加真实数据后自动展示</p></div>';
+      return;
+    }
+    el.innerHTML = items.map(a => {
+      const dot = a.dot ? 'activity-dot ' + a.dot : 'activity-dot';
+      const meta = (a.meta||[]).map(x => {
+        if(typeof x === 'string') return '<span>'+x+'</span>';
+        return '<span class="activity-tag '+(x.cls||'')+'">'+(x.tag||'')+'</span>';
+      }).join('');
+      return '<div class="activity-item"><div class="'+dot+'"></div><div class="activity-body"><div class="activity-title">'+(a.title||'')+'</div><div class="activity-meta">'+meta+'</div></div></div>';
+    }).join('');
+  }
+  function renderDashboard(){
+    const d = window.SANGYI_DATA || DEFAULT_DATA;
+    const m = d.metrics || {};
+    setText('mv-newCustomers', m.newCustomers ? m.newCustomers : '—');
+    setText('mv-newQuotes', m.newQuotes ? ('+'+m.newQuotes) : '—');
+    setText('mv-messages', m.messages ? m.messages : '—');
+    setText('mv-followups', m.followups ? m.followups : '—');
+    setText('mv-newOrders', m.newOrders ? m.newOrders : '—');
+    setText('mv-amount', m.amount ? ('$'+Number(m.amount).toLocaleString('en-US')) : '—');
+    renderActivities('todayList', d.today);
+    renderActivities('recentList', d.recent);
+  }
+  function loadData(){
+    fetch('./data.json?ts=' + Date.now(), { cache:'no-store' })
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .then(d => { window.SANGYI_DATA = d; })
+      .catch(() => { window.SANGYI_DATA = DEFAULT_DATA; })
+      .finally(() => {
+        renderDashboard();
+        renderExpoCard(document.getElementById('expoCard'));
+        renderExpoCard(document.getElementById('homeExpo'));
+      });
   }
 
   /* ============================================================
@@ -1811,8 +1852,7 @@
   initPlan();
   loadOptConfig();
   loadZohoConfig();
-  renderExpoCard(document.getElementById('expoCard'));
-  renderExpoCard(document.getElementById('homeExpo'));
+  loadData();
 
   /* ---- PWA Service Worker ---- */
   if ('serviceWorker' in navigator){

@@ -1,5 +1,5 @@
 {
-  "_说明": "桑怡工作台真实业务数据。改本文件并推送到 GitHub 即自动更新首页（无需改代码）。金额单位 USD（PI 原值，币种已核对为美元，部分定金以 ¥ 记录仅为收款通道）。customers 为客户主数据，status 可选 NEW/FREE/7-24/DEAL/LEAD/SAMPLE；orders 为订单列表（amount 为各订单最终 PI 总额）。国家由客户编号前缀推断：RU=俄罗斯 / CO=哥伦比亚 / CR=哥斯达黎加。",
+  "_说明": "桑怡工作台真实业务数据。改本文件并推送到 GitHub 即自动更新首页（无需改代码）。金额按订单币种分别记录：俄罗斯客户(编号RU)以人民币 CNY 结算，哥伦比亚(CO)/哥斯达黎加(CR)以美元 USD 结算（两类金额不混合累加）。customers 为客户主数据，status 可选 NEW/FREE/7-24/DEAL/LEAD/SAMPLE；orders 为订单列表（amount 为各订单最终 PI 总额）。国家由客户编号前缀推断：RU=俄罗斯 / CO=哥伦比亚 / CR=哥斯达黎加。",
   "updatedAt": "2026-08-02",
   "metrics": {
     "newCustomers": 3,

@@ -1,0 +1,38 @@
+name: 桑怡数据自动同步
+
+on:
+  schedule:
+    # 每天北京时间 00:00 运行（UTC+8 => 16:00 UTC 前一天）
+    - cron: '0 16 * * *'
+  workflow_dispatch: {}   # 允许在 Actions 页面 / API 手动触发
+
+# GITHUB_TOKEN 由仓库自动提供，拥有 contents:write，无需任何外部 PAT
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+
+      - name: 配置 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 运行数据同步
+        run: python sync.py
+
+      - name: 提交变更（如有）
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data.json
+          if git diff --cached --quiet; then
+            echo "无变化，跳过提交"
+          else
+            git commit -m "chore: 自动同步数据 [skip ci]"
+            git push
+          fi

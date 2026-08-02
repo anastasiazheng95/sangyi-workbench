@@ -1,0 +1,37 @@
+{
+  "_说明": "桑怡工作台真实业务数据。修改后推送到 GitHub 即自动更新首页（无需改代码）。金额单位 USD。动态 meta 支持纯字符串，或对象 {\"tag\":\"标签文字\",\"cls\":\"blue|green|orange|purple|gray\"}；dot 可选 blue/green/orange/purple。expo.tasks 的 status 可选 done/run/todo。",
+  "updatedAt": "2026-08-01",
+  "metrics": {
+    "newCustomers": 0,
+    "newQuotes": 0,
+    "messages": 0,
+    "followups": 0,
+    "newOrders": 0,
+    "amount": 0
+  },
+  "today": [],
+  "recent": [],
+  "expo": {
+    "name": "Intertabac",
+    "badge": "已确认",
+    "meta": "📍 德国 · 多特蒙德 Westfalenhallen ｜ 📅 2026-09-15 ~ 2026-09-17 ｜ 🌐 全球最大烟草及烟具展",
+    "start": "2026-09-15",
+    "progress": 27,
+    "tasks": [
+      { "name": "展位预订 / 展位图确认", "status": "done" },
+      { "name": "样品准备（烟斗 / 磨烟器 / 水烟）", "status": "done" },
+      { "name": "宣传物料设计（画册 / 名片 / 海报）", "status": "run" },
+      { "name": "客户邀约（老客户 + 海外买家）", "status": "run" },
+      { "name": "行程安排", "status": "todo" },
+      { "name": "机票预订", "status": "todo" },
+      { "name": "酒店预订", "status": "todo" },
+      { "name": "签证办理", "status": "todo" },
+      { "name": "德国认证驾照翻译", "status": "todo" },
+      { "name": "租车", "status": "todo" },
+      { "name": "现场执行方案", "status": "todo" }
+    ]
+  },
+  "zoho": {
+    "messages": []
+  }
+}

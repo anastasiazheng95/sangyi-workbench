@@ -247,6 +247,35 @@
   .metric-value { font-size: 24px; font-weight: 700; color: var(--text-1); }
   .metric-value .amt-line { font-size: 18px; line-height: 1.45; font-weight: 700; color: var(--text-1); }
   .metric-value .amt-line .cur { color: var(--text-3); font-weight: 600; margin-right: 2px; }
+  /* ===== 收件箱 inbox ===== */
+  .inbox-toolbar { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
+  .inbox-filters { display:flex; gap:8px; flex-wrap:wrap; }
+  .chip { font-size:12.5px; padding:6px 12px; border-radius:999px; border:1px solid var(--bb-200); color:var(--text-2); background:#fff; cursor:pointer; transition:.15s; }
+  .chip:hover { border-color:var(--bb-300); }
+  .chip.active { background:var(--bb-600); border-color:var(--bb-600); color:#fff; }
+  .chip .c-count { opacity:.7; margin-left:5px; }
+  .inbox-unread-toggle { font-size:12.5px; color:var(--text-2); display:flex; align-items:center; gap:6px; cursor:pointer; user-select:none; }
+  .inbox-group { margin-bottom:18px; }
+  .inbox-group-head { display:flex; align-items:center; gap:8px; font-weight:600; font-size:13.5px; color:var(--text-1); margin:6px 0 10px; }
+  .inbox-group-head .gh-count { color:var(--text-3); font-weight:500; font-size:12px; }
+  .inbox-item { display:flex; gap:12px; padding:12px 14px; border:1px solid var(--bb-100); border-radius:12px; background:#fff; margin-bottom:8px; cursor:pointer; transition:.15s; }
+  .inbox-item:hover { border-color:var(--bb-300); box-shadow:0 4px 14px rgba(45,125,184,.08); }
+  .inbox-item.unread { background:var(--bb-50); border-color:var(--bb-200); }
+  .inbox-dot { width:9px; height:9px; border-radius:50%; background:var(--bb-600); margin-top:6px; flex:0 0 auto; }
+  .inbox-item:not(.unread) .inbox-dot { background:transparent; }
+  .inbox-body { flex:1; min-width:0; }
+  .inbox-row1 { display:flex; align-items:center; gap:8px; }
+  .inbox-cust { font-weight:700; color:var(--text-1); font-size:14px; }
+  .inbox-chan { font-size:11px; padding:2px 8px; border-radius:999px; background:var(--bb-100); color:var(--bb-700); white-space:nowrap; }
+  .inbox-chan.ch-wa { background:#dcfce7; color:#15803d; }
+  .inbox-chan.ch-em { background:#e0f2fe; color:#0369a1; }
+  .inbox-chan.ch-wb { background:#fef3c7; color:#b45309; }
+  .inbox-chan.ch-zh { background:#ede9fe; color:#6d28d9; }
+  .inbox-time { margin-left:auto; font-size:11.5px; color:var(--text-3); white-space:nowrap; }
+  .inbox-text { color:var(--text-2); font-size:13px; margin-top:4px; line-height:1.5; }
+  .inbox-empty { text-align:center; color:var(--text-3); padding:40px 0; }
+  .nav-badge { margin-left:auto; min-width:18px; height:18px; padding:0 5px; border-radius:999px; background:#ef4444; color:#fff; font-size:11px; font-weight:700; display:none; align-items:center; justify-content:center; }
+  .nav-badge.on { display:inline-flex; }
   .metric-value .unit { font-size: 13px; color: var(--text-3); margin-left: 4px; font-weight: 500; }
   .metric-icon {
     position: absolute; right: 14px; top: 14px;
@@ -761,6 +790,7 @@
       <div class="nav-item" data-page="tree"><span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7" height="5" rx="1.5"/><rect x="14" y="4" width="7" height="5" rx="1.5"/><rect x="8.5" y="15" width="7" height="5" rx="1.5"/><path d="M6.5 9v3h11V9M12 12v3"/></svg></span><span>分类树</span></div>
       <div class="nav-item" data-page="crm"><span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M16 5.2a3 3 0 0 1 0 5.6"/><path d="M17.5 14a5.5 5.5 0 0 1 3 5.2"/></svg></span><span>客户 CRM</span></div>
       <div class="nav-item" data-page="dev"><span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span><span>客户开发中心</span></div>
+      <div class="nav-item" data-page="inbox"><span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><span>客户留言</span><i class="nav-badge" id="navInboxBadge"></i></div>
       <div class="nav-item" data-page="webopt"><span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15c-1.6 1.6-2 5-2 5s3.4-.4 5-2"/><path d="M14.5 4.5c2.8 0 5.5 2.7 5.5 5.5 0 3.8-3.8 7.5-7.5 9.5l-3-3C6.5 13.3 10 6.5 14.5 4.5Z"/><circle cx="14.8" cy="10" r="1.8"/></svg></span><span>网站优化</span></div>
       <div class="nav-item" data-page="orders"><span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v3h6V3"/><path d="M8.5 11h7M8.5 15h5"/></svg></span><span>订单管理</span></div>
       <div class="nav-item" data-page="expo"><span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/><path d="M7.5 11h1.5M11 11h2M15 11h1.5"/></svg></span><span>展会管理</span></div>
@@ -812,7 +842,7 @@
             <div class="metric-label">新报价</div>
             <div class="metric-value" id="mv-newQuotes">—</div>
           </div>
-          <div class="metric c-yellow clickable" onclick="openZohoPanel()">
+          <div class="metric c-yellow clickable" onclick="goPage('inbox')">
             <div class="metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8 8 0 0 1-11.6 7.1L4 20l1.4-5.4A8 8 0 1 1 21 11.5Z"/></svg></div>
             <div class="metric-label">客户留言</div>
             <div class="metric-value" id="mv-messages">—</div>
@@ -926,6 +956,15 @@
         <div class="dev-grid" id="devBody"></div>
       </section>
 
+
+      <!-- ===== 客户留言 / 收件箱 ===== -->
+      <section class="page" id="page-inbox">
+        <div class="inbox-toolbar">
+          <div class="inbox-filters" id="inboxFilters"></div>
+          <label class="inbox-unread-toggle"><input type="checkbox" id="inboxUnreadOnly" onchange="renderInbox()"> 仅看未读</label>
+        </div>
+        <div class="inbox-list" id="inboxList"></div>
+      </section>
 
       <!-- ===== 网站优化 ===== -->
       <section class="page" id="page-webopt">
@@ -1172,8 +1211,8 @@
           </div>
           <div class="metric c-pink">
             <div class="metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18"/><circle cx="16.5" cy="14.5" r="1.2"/></svg></div>
-            <div class="metric-label">本月成交额</div>
-            <div class="metric-value">$82,560</div>
+            <div class="metric-label">累计成交额</div>
+            <div class="metric-value" id="mv-work-amount">—</div>
           </div>
           <div class="metric c-purple">
             <div class="metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16l5-5 4 4 8-8"/><path d="M21 7v5h-5"/></svg></div>
@@ -1472,6 +1511,7 @@
     tree:     {t:'分类树',                 s:'按品类 / 国家 / 等级组织你的客户与产品'},
     crm:      {t:'客户 CRM',               s:'客户主数据 · 标签 · 来源 · 跟进记录'},
     dev:      {t:'客户开发中心',           s:'深度客户卡片 · 采购画像 · 跟进建议'},
+    inbox:    {t:'客户留言 / 收件箱',       s:'WhatsApp · 邮件 · 网站询盘 · Zoho 统一聚合'},
     webopt:   {t:'网站优化',               s:'SEO 体检 · 速度 · 内容 · 移动端'},
     orders:   {t:'订单管理',               s:'订单状态跟踪 · 生产进度 · 发货'},
     expo:     {t:'展会管理',               s:'Canton Fair · 线上展会 · 客户跟进'},
@@ -1896,7 +1936,6 @@
     const m = d.metrics || {};
     setText('mv-newCustomers', m.newCustomers ? m.newCustomers : '—');
     setText('mv-newQuotes', m.newQuotes ? ('+'+m.newQuotes) : '—');
-    setText('mv-messages', m.messages ? m.messages : '—');
     setText('mv-followups', m.followups ? m.followups : '—');
     setText('mv-newOrders', m.newOrders ? m.newOrders : '—');
     // 成交金额：按币种分两行显示（人民币 / 美元），从订单实时汇总
@@ -1907,8 +1946,78 @@
     if (cnySum > 0) amtHtml += '<div class="amt-line"><span class="cur">¥</span>' + Number(cnySum).toLocaleString('en-US') + '</div>';
     if (usdSum > 0) amtHtml += '<div class="amt-line"><span class="cur">$</span>' + Number(usdSum).toLocaleString('en-US') + '</div>';
     document.getElementById('mv-amount').innerHTML = amtHtml || '—';
+    const workAmt = document.getElementById('mv-work-amount');
+    if (workAmt) workAmt.innerHTML = amtHtml || '—';
     renderActivities('todayList', d.today);
     renderActivities('recentList', d.recent);
+  }
+
+  /* ---- 收件箱 / 客户留言（按渠道聚合） ---- */
+  const CHANNELS = {
+    whatsapp:{ label:'WhatsApp', cls:'ch-wa' },
+    email:   { label:'邮件',     cls:'ch-em' },
+    web:     { label:'网站询盘', cls:'ch-wb' },
+    zoho:    { label:'Zoho CRM', cls:'ch-zh' }
+  };
+  const SAMPLE_INBOX = [
+    { id:'m1', channel:'whatsapp', customer:'Stais-Alexander', text:'亚历山大，第五单玻璃烟斗已发货，提单号稍后发你。', time:'2026-07-30 14:20', unread:true },
+    { id:'m2', channel:'email',    customer:'RAUL',            text:'Hi Raul, 巴拿马渠道那批改烟器 PI 已附上，请查收。',     time:'2026-07-29 09:05', unread:true },
+    { id:'m3', channel:'web',      customer:'Juan',            text:'Juan 通过官网询盘：想追加一批玻璃烟斗，请报价。',       time:'2026-07-28 21:40', unread:false },
+    { id:'m4', channel:'zoho',     customer:'RAUL',            text:'Zoho：RAUL 的样品单已标记发货。',                       time:'2026-07-25 16:10', unread:false },
+    { id:'m5', channel:'whatsapp', customer:'Juan',            text:'Juan：第六单的 packing list 收到，谢谢！',              time:'2026-07-22 11:30', unread:false },
+    { id:'m6', channel:'email',    customer:'Stais-Alexander', text:'亚历山大：请确认第四单的退税资料是否齐全。',             time:'2026-07-20 10:15', unread:true }
+  ];
+  let inboxFilter = 'all';
+  function getInbox(){ return (window.SANGYI_DATA && window.SANGYI_DATA.inbox && window.SANGYI_DATA.inbox.length) ? window.SANGYI_DATA.inbox : SAMPLE_INBOX; }
+  function escHtml(s){ return String(s==null?'':s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+  function renderInbox(){
+    const all = getInbox();
+    const unreadOnly = document.getElementById('inboxUnreadOnly') && document.getElementById('inboxUnreadOnly').checked;
+    const base = unreadOnly ? all.filter(m => m.unread) : all;
+    const view = (inboxFilter && inboxFilter !== 'all') ? base.filter(m => m.channel === inboxFilter) : base;
+    const filtersEl = document.getElementById('inboxFilters');
+    const chans = ['all', ...Object.keys(CHANNELS)];
+    filtersEl.innerHTML = chans.map(ch => {
+      const label = ch === 'all' ? '全部' : CHANNELS[ch].label;
+      const cnt = ch === 'all' ? all.length : all.filter(m => m.channel === ch).length;
+      return '<div class="chip' + (inboxFilter === ch ? ' active' : '') + '" data-ch="' + ch + '">' + label + '<span class="c-count">' + cnt + '</span></div>';
+    }).join('');
+    filtersEl.querySelectorAll('.chip').forEach(c => c.onclick = () => { inboxFilter = c.dataset.ch; renderInbox(); });
+    const listEl = document.getElementById('inboxList');
+    if (!view.length) { listEl.innerHTML = '<div class="inbox-empty">暂无留言</div>'; return; }
+    let html = '';
+    Object.keys(CHANNELS).forEach(ch => {
+      const items = view.filter(m => m.channel === ch);
+      if (!items.length) return;
+      html += '<div class="inbox-group"><div class="inbox-group-head">' + CHANNELS[ch].label + '<span class="gh-count">' + items.length + ' 条</span></div>';
+      items.forEach(m => {
+        html += '<div class="inbox-item' + (m.unread ? ' unread' : '') + '" onclick="markInboxRead(\'' + m.id + '\')">'
+              + '<div class="inbox-dot"></div>'
+              + '<div class="inbox-body">'
+              + '<div class="inbox-row1"><span class="inbox-cust">' + escHtml(m.customer) + '</span>'
+              + '<span class="inbox-chan ' + CHANNELS[ch].cls + '">' + CHANNELS[ch].label + '</span>'
+              + '<span class="inbox-time">' + escHtml(m.time || '') + '</span></div>'
+              + '<div class="inbox-text">' + escHtml(m.text || '') + '</div>'
+              + '</div></div>';
+      });
+      html += '</div>';
+    });
+    listEl.innerHTML = html;
+  }
+  function markInboxRead(id){
+    const arr = getInbox();
+    const m = arr.find(x => x.id === id);
+    if (m) m.unread = false;
+    renderInbox();
+    updateInboxBadges();
+  }
+  function updateInboxBadges(){
+    const all = getInbox();
+    const unread = all.filter(m => m.unread).length;
+    const badge = document.getElementById('navInboxBadge');
+    if (badge) { badge.textContent = unread > 0 ? unread : ''; badge.classList.toggle('on', unread > 0); }
+    const mv = document.getElementById('mv-messages');
+    if (mv) mv.textContent = unread > 0 ? unread : '—';
   }
   function loadData(){
     fetch('./data.json?ts=' + Date.now(), { cache:'no-store' })
@@ -1924,6 +2033,8 @@
         renderDev();
         renderOrders();
         renderExpoCost();
+        renderInbox();
+        updateInboxBadges();
       });
   }
 
@@ -1934,6 +2045,8 @@
   renderDev();
   renderOrders();
   renderExpoCost();
+  renderInbox();
+  updateInboxBadges();
   renderOptSteps();
   initPlan();
   loadOptConfig();

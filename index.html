@@ -793,7 +793,9 @@
     .metric-value { font-size: 20px; }
     .metric-icon { width: 26px; height: 26px; font-size: 13px; right: 10px; top: 10px; }
 
-    .two-col, .dev-grid { gap: 12px; }
+    .two-col, .dev-grid { grid-template-columns: 1fr; gap: 12px; }
+    .product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .product-cover { font-size: 36px; }
     .panel-body { padding: 8px 2px; overflow-x: auto; }
     .data-table thead th, .data-table tbody td { padding: 10px 11px; font-size: 12.5px; }
 

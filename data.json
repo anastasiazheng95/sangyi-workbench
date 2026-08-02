@@ -9,8 +9,19 @@
     "newOrders": 16,
     "amount": 0
   },
-  "today": [],
-  "recent": [],
+  "today": [
+    { "title": "RU-291-5 第五单玻璃烟斗已发货，提单号稍后发出", "dot": "green", "meta": ["Stais-Alexander", "俄罗斯", "¥690,235"] },
+    { "title": "Juan 通过官网追加一批玻璃烟斗询盘，待报价", "dot": "blue", "meta": ["Juan", "哥斯达黎加", "新询盘"] },
+    { "title": "RAUL 巴拿马渠道批烟器 PI 已发送，等待确认", "dot": "blue", "meta": ["RAUL", "哥伦比亚", "$80,188"] },
+    { "title": "第四单（RU-291-4）退税资料待亚历山大确认", "dot": "amber", "meta": ["跟进", "俄罗斯", "¥405,844"] },
+    { "title": "Intertabac 宣传物料设计进行中（画册/名片/海报）", "dot": "purple", "meta": ["展会", "德国", "进度 27%"] }
+  ],
+  "recent": [
+    { "title": "RU-291-4 第四单玻璃烟斗已发货", "dot": "green", "meta": ["Stais-Alexander", "2025-06-19", "¥405,844"] },
+    { "title": "CO-246-5 RAUL 玻璃烟斗已发货", "dot": "green", "meta": ["RAUL", "2025-08-20", "$18,761"] },
+    { "title": "CR-248-6 Juan 第六单玻璃烟斗已发货", "dot": "green", "meta": ["Juan", "2025-03-22", "$56,455"] },
+    { "title": "RU-291-5 第五单玻璃烟斗下单", "dot": "blue", "meta": ["Stais-Alexander", "2026-04-01", "¥690,235"] }
+  ],
   "expo": {
     "name": "Intertabac",
     "badge": "已确认",
@@ -63,7 +74,16 @@
         "status": "todo"
       }
     ],
-    "costs": []
+    "costs": [
+      { "name": "展位费（9㎡ 标准展位）", "amount": 4500, "note": "Westfalenhallen · Intertabac" },
+      { "name": "国际机票（往返多特蒙德）", "amount": 1200, "note": "经济舱" },
+      { "name": "酒店住宿（4 晚）", "amount": 900, "note": "展会周边" },
+      { "name": "样品国际运输", "amount": 600, "note": "烟斗/磨烟器/水烟" },
+      { "name": "宣传物料印刷", "amount": 350, "note": "画册/名片/海报" },
+      { "name": "当地交通（租车/地铁）", "amount": 250, "note": "" },
+      { "name": "餐饮", "amount": 300, "note": "3 天展会期间" },
+      { "name": "签证 / 驾照翻译认证", "amount": 150, "note": "德国" }
+    ]
   },
   "customers": [
     {

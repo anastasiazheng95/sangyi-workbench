@@ -816,6 +816,7 @@
             <div class="metric-label">客户留言</div>
             <div class="metric-value" id="mv-messages">—</div>
             <div class="metric-badge zoho-engine" id="zohoEngine"><span class="plug-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6M15 2v6M7 8h10v3a5 5 0 0 1-5 5 5 5 0 0 1-5-5V8Z"/><path d="M12 16v6M8 22h8"/></svg></span><span class="ze-text">Zoho · 待接入</span></div>
+            <div class="metric-badge wa-engine" id="waEngine" onclick="openWaPanel();event.stopPropagation()"><span class="plug-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l2 5-2 1.5a12 12 0 0 0 5.5 5.5L20 14l2 5v1a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg></span><span class="wa-text">WhatsApp · 待接入</span></div>
           </div>
           <div class="metric c-orange">
             <div class="metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.2 2"/></svg></div>
@@ -1308,6 +1309,18 @@
   </div>
 </div>
 
+<div class="modal-mask" id="waModal">
+  <div class="modal">
+    <h3>客户留言 · WhatsApp 集成</h3>
+    <div id="waModalStatus" style="font-size:13px;color:var(--text-2);margin-bottom:10px"></div>
+    <p style="font-size:12.5px;color:var(--text-3);line-height:1.7">WhatsApp 客户消息通过 Twilio WhatsApp API 每日自动同步到首页（无需手动）。同步由 GitHub Action 驱动：在仓库 Secrets 配置 Twilio 凭证（Account SID / Auth Token / 本机 WhatsApp 号码）后自动开启，客户来讯会出现在「客户留言」指标与今日动态。</p>
+    <div id="waMsgCount" style="font-size:12.5px;color:var(--text-2);margin:8px 0"></div>
+    <div class="modal-foot">
+      <button class="btn btn-light btn-sm" onclick="closeWaModal()">关闭</button>
+    </div>
+  </div>
+</div>
+
 <script>
   /* ============================================================
      Sample data
@@ -1540,6 +1553,28 @@
   }
   function closeZohoModal(){ document.getElementById('zohoModal').classList.remove('show'); }
 
+  /* ---- WhatsApp 集成（客户留言 · 自动同步端口） ---- */
+  function updateWaEngine(){
+    const d = window.SANGYI_DATA || {};
+    const wa = d.whatsapp || {};
+    const on = !!wa.connected;
+    const badge = document.getElementById('waEngine');
+    if(badge){
+      badge.classList.toggle('on', on);
+      const t = badge.querySelector('.wa-text');
+      if(t) t.textContent = on ? 'WhatsApp · 已接入' : 'WhatsApp · 待接入';
+    }
+    const st = document.getElementById('waModalStatus');
+    if(st) st.textContent = on ? '当前状态：已接入（每日自动同步）' : '当前状态：待接入（未配置 Trilio 凭证）';
+    const cnt = document.getElementById('waMsgCount');
+    if(cnt) cnt.textContent = '已同步消息：' + ((wa.messages) || []).length + ' 条';
+  }
+  function openWaPanel(){
+    updateWaEngine();
+    document.getElementById('waModal').classList.add('show');
+  }
+  function closeWaModal(){ document.getElementById('waModal').classList.remove('show'); }
+
   function openModal(kind){
     const titles = {
       quote:    '📝 智能生成报价单',
@@ -1557,6 +1592,9 @@
   });
   document.getElementById('zohoModal').addEventListener('click', e => {
     if (e.target.id === 'zohoModal') closeZohoModal();
+  });
+  document.getElementById('waModal').addEventListener('click', e => {
+    if (e.target.id === 'waModal') closeWaModal();
   });
 
   /* ============================================================
@@ -1838,6 +1876,7 @@
       .catch(() => { window.SANGYI_DATA = DEFAULT_DATA; })
       .finally(() => {
         renderDashboard();
+        updateWaEngine();
         renderExpoCard(document.getElementById('expoCard'));
         renderExpoCard(document.getElementById('homeExpo'));
       });

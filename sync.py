@@ -13,6 +13,8 @@ import json
 import datetime
 from pathlib import Path
 
+import sync_whatsapp  # WhatsApp 客户消息自动同步（凭证缺失时安全跳过）
+
 DATA = Path(__file__).resolve().parent / "data.json"
 
 
@@ -51,7 +53,8 @@ def refresh_meta(data):
 # SYNC_SOURCES = [sync_from_zoho]
 # =====================================================================
 
-SYNC_SOURCES = []
+# WhatsApp 客户消息同步（Twilio API 拉取，凭证由环境变量 / GitHub Secrets 提供）
+SYNC_SOURCES = [sync_whatsapp.sync_from_whatsapp]
 
 
 def main():

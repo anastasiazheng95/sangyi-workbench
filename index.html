@@ -421,6 +421,39 @@
   .status-UNKNOWN  { background: #f0f2f6; color: var(--text-3); }
   .status-7-24     { background: var(--purple-50); color: var(--purple-500); }
 
+  /* ---- CRM 6 层模块 ---- */
+  .subnav { display:flex; gap:6px; margin-bottom:14px; flex-wrap:wrap; border-bottom:1px solid var(--border); padding-bottom:10px; }
+  .subnav-item { padding:7px 13px; border-radius:8px; font-size:13px; font-weight:600; color:var(--text-2); background:#f5f7fb; cursor:pointer; user-select:none; white-space:nowrap; }
+  .subnav-item:hover { background:#eef1f7; }
+  .subnav-item.active { background:var(--bb-700); color:#fff; }
+  .crm-section-title { font-size:13px; font-weight:700; color:var(--text-2); margin:2px 2px 12px; }
+  .scroll-x { width:100%; overflow-x:auto; }
+  .tier-badge { display:inline-block; padding:2px 9px; border-radius:5px; font-size:11.5px; font-weight:700; }
+  .tier-badge.t1 { background:#fdecec; color:#e23b3b; }
+  .tier-badge.t2 { background:var(--blue-50); color:var(--blue-500); }
+  .tier-badge.t3 { background:#f0f2f6; color:var(--text-3); }
+  .st-key    { background:var(--blue-50);  color:var(--blue-500); }
+  .st-active { background:var(--green-50); color:var(--green-500); }
+  .st-idle   { background:#f0f2f6;         color:var(--text-3); }
+  .st-purple { background:var(--purple-50);color:var(--purple-500); }
+  .st-lost   { background:#fdecec;         color:#e23b3b; }
+  .score-bar { display:inline-block; width:88px; height:7px; border-radius:4px; background:#eef1f7; overflow:hidden; vertical-align:middle; }
+  .score-bar i { display:block; height:100%; }
+  .score-bar i.st-key    { background:var(--blue-500); }
+  .score-bar i.st-active { background:var(--green-500); }
+  .score-bar i.st-idle   { background:var(--text-3); }
+  .score-num { font-size:12px; font-weight:700; color:var(--text-1); margin-left:6px; vertical-align:middle; }
+  .score-num small { color:var(--text-3); font-weight:600; }
+  .score-seg { display:flex; height:9px; border-radius:4px; overflow:hidden; background:#eef1f7; width:120px; }
+  .score-seg .seg.company { background:var(--blue-500); }
+  .score-seg .seg.match   { background:var(--green-500); }
+  .score-seg .seg.dev     { background:var(--purple-500); }
+  .stage-badge { display:inline-block; font-size:11px; font-weight:700; color:var(--purple-500); }
+  .mini-bar { width:90px; height:5px; border-radius:3px; background:#eef1f7; overflow:hidden; margin-top:4px; }
+  .mini-bar i { display:block; height:100%; background:var(--purple-500); }
+  .nowrap { white-space:nowrap; }
+  .sub { font-size:11px; color:var(--text-3); margin-top:3px; }
+
   .row-actions { display: flex; gap: 10px; color: var(--text-3); font-size: 12.5px; }
   .row-actions a { cursor: pointer; }
   .row-actions a:hover { color: var(--bb-700); }
@@ -954,36 +987,23 @@
         </div>
       </section>
 
-      <!-- ===== 客户 CRM ===== -->
+      <!-- ===== 客户 CRM（6 层架构） ===== -->
       <section class="page" id="page-crm">
-        <div class="toolbar">
-          <span class="label">客户标签：</span>
-          <span class="pill">全部客户</span>
-          <span class="pill green">潜在客户</span>
-          <span class="pill pink">成交客户</span>
-          <span class="pill outline">+ 添加标签</span>
-          <span style="flex:1"></span>
-          <input class="input" placeholder="🔍 搜索客户名称 / 国家 / 联系人" style="width:260px" />
-          <button class="btn btn-light btn-sm" onclick="goPage('dev')">开发中心</button>
-          <button class="btn btn-primary btn-sm" onclick="openModal()">＋ 添加客户</button>
+        <div class="subnav" id="crmSubnav">
+          <button class="subnav-item active" data-crm="accounts" onclick="setCRMTab('accounts')">① 公司库</button>
+          <button class="subnav-item" data-crm="contacts" onclick="setCRMTab('contacts')">② 联系人</button>
+          <button class="subnav-item" data-crm="pipeline" onclick="setCRMTab('pipeline')">③ 销售机会</button>
+          <button class="subnav-item" data-crm="activities" onclick="setCRMTab('activities')">④ 沟通记录</button>
+          <button class="subnav-item" data-crm="intel" onclick="setCRMTab('intel')">⑤ 市场情报</button>
+          <button class="subnav-item" data-crm="mgmt" onclick="setCRMTab('mgmt')">⑥ 客户维护</button>
         </div>
-
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>客户名称</th>
-              <th>国家</th>
-              <th>添加人</th>
-              <th>来源</th>
-              <th>联系人</th>
-              <th>产品</th>
-              <th>状态</th>
-              <th>完成日期</th>
-              <th>操作</th>
-            </tr>
-          </thead>
-          <tbody id="crmBody"></tbody>
-        </table>
+        <div class="toolbar">
+          <input class="input" id="crmSearch" placeholder="🔍 搜索…" oninput="renderCRMTab()" style="width:260px" />
+          <span style="flex:1"></span>
+          <button class="btn btn-light btn-sm" onclick="goPage('dev')">深度档案</button>
+          <button class="btn btn-primary btn-sm" onclick="openModal()">＋ 新建</button>
+        </div>
+        <div id="crmView"></div>
       </section>
 
       <!-- ===== 客户开发中心 ===== -->
@@ -1449,57 +1469,213 @@
     const m = STATUS_MAP[s] || [s||'未知','UNKNOWN'];
     return '<span class="status-badge status-'+m[1]+'">'+m[0]+'</span>';
   }
-  function renderCRM(){
-    const list = (window.SANGYI_DATA && window.SANGYI_DATA.customers && window.SANGYI_DATA.customers.length) ? window.SANGYI_DATA.customers : crmData;
-    const html = list.map(r => `
-      <tr>
-        <td><b>${r.name}</b></td>
-        <td><span class="country-flag">${r.flag} ${r.country}</span></td>
-        <td>${r.addedBy}</td>
-        <td>${r.source}</td>
-        <td>${r.contact}</td>
-        <td>${r.product}</td>
-        <td>${statusBadge(r.status)}</td>
-        <td>${r.date}</td>
-        <td>
-          <div class="row-actions">
-            <a onclick="goPage('dev')">详情</a>
-            <a>编辑</a>
-            <a class="danger">删除</a>
-          </div>
-        </td>
-      </tr>
-    `).join('');
-    document.getElementById('crmBody').innerHTML = html;
+  /* ---- CRM 6 层：数据访问 / 工具 ---- */
+  function ACC(){ return (window.SANGYI_DATA && window.SANGYI_DATA.accounts) || []; }
+  function CON(){ return (window.SANGYI_DATA && window.SANGYI_DATA.contacts) || []; }
+  function OPP(){ return (window.SANGYI_DATA && window.SANGYI_DATA.opportunities) || []; }
+  function ACT(){ return (window.SANGYI_DATA && window.SANGYI_DATA.activities) || []; }
+  function INT(){ return (window.SANGYI_DATA && window.SANGYI_DATA.marketIntel) || []; }
+  function esc(s){ return (s==null?'':String(s)).replace(/[&<>"]/g, function(c){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]; }); }
+
+  function scoreBreakdown(a){
+    var p = ((a.product||'')+(a.tags?a.tags.join(' '):'')).toLowerCase();
+    var tags = (a.tags||[]).join(' ')+(a.companyName||'');
+    var company=0, match=0, dev=0;
+    if(/distributor|wholesale/i.test(a.companyType||'')) company+=10;
+    if(/multi|多国|\+/.test(a.warehouse||'')) company+=10;
+    if(a.warehouse && a.warehouse.trim()) company+=10;
+    if(/brand|自有品牌/i.test(tags)) company+=10;
+    if(/glass|玻璃/.test(p)) match+=10;
+    if(/grinder|研磨|磨烟/.test(p)) match+=10;
+    if(/pipe|水烟|烟斗/.test(p)) match+=10;
+    if(a.contactName) dev+=10;
+    if(/active|key|成交|deal/i.test(a.status||'')) dev+=10;
+    if(OPP().some(function(o){return o.accountId===a.accountId;})) dev+=10;
+    company=Math.min(company,40); match=Math.min(match,30); dev=Math.min(dev,30);
+    return { company:company, match:match, dev:dev, total:company+match+dev };
+  }
+  function tierBadge(t){
+    var m={'Tier 1':['Tier 1','t1'],'Tier 2':['Tier 2','t2'],'Tier 3':['Tier 3','t3']};
+    var v=m[t]||[t||'—','t3'];
+    return '<span class="tier-badge '+v[1]+'">'+v[0]+'</span>';
+  }
+  function statusBadge2(s){
+    var m={'Key Account':['Key','st-key'],'Active Customer':['Active','st-active'],'Growing Customer':['Growing','st-active'],'Inactive':['Inactive','st-idle'],'Lost':['Lost','st-lost']};
+    var v=m[s]||[s||'—','st-idle'];
+    return '<span class="status-badge '+v[1]+'">'+v[0]+'</span>';
+  }
+  function decisionBadge(d){
+    var m={'High':['高','st-key'],'Medium':['中','st-active'],'Low':['低','st-idle']};
+    var v=m[d]||[d||'—','st-idle'];
+    return '<span class="status-badge '+v[1]+'">'+v[0]+'</span>';
+  }
+  function channelBadge(c){
+    var m={'WhatsApp':['WhatsApp','st-active'],'Email':['Email','st-key'],'Exhibition':['展会','st-purple'],'Call':['电话','st-idle'],'Meeting':['会议','st-active'],'Web':['官网','st-key']};
+    var v=m[c]||[c||'—','st-idle'];
+    return '<span class="status-badge '+v[1]+'">'+v[0]+'</span>';
+  }
+  function oppHighBadge(o){
+    var m={'High':['高','st-key'],'Medium':['中','st-active'],'Low':['低','st-idle']};
+    var v=m[o]||[o||'—','st-idle'];
+    return '<span class="status-badge '+v[1]+'">'+v[0]+'</span>';
+  }
+  function scoreBar(total){
+    var color = total>=80?'st-key':(total>=60?'st-active':'st-idle');
+    return '<div class="score-bar"><i class="'+color+'" style="width:'+total+'%"></i></div><span class="score-num">'+total+'</span>';
+  }
+  function searchFilter(fields){
+    var el=document.getElementById('crmSearch');
+    var q=(el&&el.value||'').trim().toLowerCase();
+    if(!q) return function(){return true;};
+    return function(r){ return fields.some(function(f){ return String(r[f]||'').toLowerCase().indexOf(q)>=0; }); };
+  }
+  function setTable(title, headers, rowsHtml){
+    var view=document.getElementById('crmView');
+    if(!view) return;
+    if(!rowsHtml || rowsHtml.length===0){
+      view.innerHTML='<div class="crm-section-title">'+title+'</div><div class="empty-state"><p>暂无数据 · 在 data.json 中添加后自动展示</p></div>';
+      return;
+    }
+    var head='<tr>'+headers.map(function(h){return '<th>'+h+'</th>';}).join('')+'</tr>';
+    view.innerHTML='<div class="crm-section-title">'+title+'</div><div class="scroll-x"><table class="data-table"><thead>'+head+'</thead><tbody>'+rowsHtml+'</tbody></table></div>';
   }
 
+  /* ---- 6 层渲染 ---- */
+  function renderAccounts(){
+    var list = ACC().filter(searchFilter(['name','companyName','country','accountId','tier','status']));
+    var rows = list.map(function(a){
+      var s = scoreBreakdown(a);
+      return '<tr>'
+        +'<td><b>'+esc(a.name)+'</b><div class="sub">'+esc(a.accountId)+'</div></td>'
+        +'<td><span class="country-flag">'+esc(a.flag)+' '+esc(a.country)+'</span></td>'
+        +'<td>'+esc(a.companyType||'—')+'</td>'
+        +'<td>'+tierBadge(a.tier)+'</td>'
+        +'<td>'+scoreBar(s.total)+'</td>'
+        +'<td>'+statusBadge2(a.status)+'</td>'
+        +'<td>'+esc(a.source||'—')+'</td>'
+        +'<td><div class="row-actions"><a onclick="goPage(\'dev\')">档案</a><a>编辑</a></div></td>'
+        +'</tr>';
+    }).join('');
+    setTable('① 公司库 · Account Database（'+list.length+' 家）', ['Account','国家','类型','分级','CRM 评分','状态','来源',''], rows);
+  }
+  function renderContacts(){
+    var list = CON().filter(searchFilter(['name','accountId','position','role','email','decisionPower']));
+    var rows = list.map(function(c){
+      var acc = ACC().find(function(a){return a.accountId===c.accountId;})||{};
+      return '<tr>'
+        +'<td><b>'+esc(c.name)+'</b></td>'
+        +'<td>'+esc(acc.name||c.accountId)+'</td>'
+        +'<td>'+esc(c.position||'—')+'</td>'
+        +'<td>'+esc(c.role||'—')+'</td>'
+        +'<td>'+esc(c.language||'—')+'</td>'
+        +'<td>'+decisionBadge(c.decisionPower)+'</td>'
+        +'<td>'+esc(c.email||'—')+'</td>'
+        +'<td>'+esc(c.whatsapp||c.phone||'—')+'</td>'
+        +'</tr>';
+    }).join('');
+    setTable('② 联系人 · Contact Database（'+list.length+' 位）', ['姓名','所属公司','职位','角色','语言','决策权','邮箱','电话/WhatsApp'], rows);
+  }
+  function renderPipeline(){
+    var PIPE = ['Lead','Contacted','Qualified','Meeting Scheduled','Sample Requested','Quotation Sent','Negotiation','First Order','Repeat Customer'];
+    var list = OPP().filter(searchFilter(['customer','products','accountId','stage','owner']));
+    var rows = list.map(function(o){
+      var idx = PIPE.indexOf(o.stage);
+      var pct = Math.round((idx+1)/PIPE.length*100);
+      return '<tr>'
+        +'<td><b>'+esc(o.oppId)+'</b></td>'
+        +'<td>'+esc(o.customer)+'</td>'
+        +'<td>'+esc(o.products||'—')+'</td>'
+        +'<td>'+(o.amount!=null ? (o.currency==='CNY'?'¥':'$')+Number(o.amount).toLocaleString('en-US') : '—')+'</td>'
+        +'<td class="nowrap"><span class="stage-badge">'+esc(o.stage)+'</span><div class="mini-bar"><i style="width:'+pct+'%"></i></div></td>'
+        +'<td>'+(o.probability!=null?o.probability+'%':'—')+'</td>'
+        +'<td>'+esc(o.expectedDate||'—')+'</td>'
+        +'<td>'+esc(o.nextAction||'—')+'</td>'
+        +'<td>'+esc(o.owner||'—')+'</td>'
+        +'</tr>';
+    }).join('');
+    setTable('③ 销售机会 · Sales Pipeline（'+list.length+' 个）', ['Opp ID','客户','产品','预计金额','阶段','概率','预计下单','下一步','负责人'], rows);
+  }
+  function renderInteractions(){
+    var list = ACT().filter(searchFilter(['content','channel','contact','accountId','nextStep'])).slice().sort(function(a,b){return (b.date||'').localeCompare(a.date||'');});
+    var rows = list.map(function(a){
+      var acc = ACC().find(function(x){return x.accountId===a.accountId;})||{};
+      return '<tr>'
+        +'<td class="nowrap">'+esc(a.date||'—')+'</td>'
+        +'<td>'+channelBadge(a.channel)+'</td>'
+        +'<td>'+esc(acc.name||a.accountId||'—')+'</td>'
+        +'<td>'+esc(a.content||'—')+'</td>'
+        +'<td>'+esc(a.nextStep||'—')+'</td>'
+        +'<td class="nowrap">'+esc(a.followUp||'—')+'</td>'
+        +'</tr>';
+    }).join('');
+    setTable('④ 沟通记录 · Interaction History（'+list.length+' 条）', ['日期','渠道','客户','内容','下一步','跟进日期'], rows);
+  }
+  function renderIntel(){
+    var list = INT().filter(searchFilter(['company','products','countries','channels','reason']));
+    var rows = list.map(function(m){
+      var acc = ACC().find(function(a){return a.accountId===m.accountId;})||{};
+      return '<tr>'
+        +'<td><b>'+esc(acc.name||m.company)+'</b></td>'
+        +'<td>'+esc(m.channels||'—')+'</td>'
+        +'<td>'+esc(m.countries||'—')+'</td>'
+        +'<td>'+esc(m.products||'—')+'</td>'
+        +'<td>'+esc(m.brands||'—')+'</td>'
+        +'<td>'+esc(m.priceTier||'—')+'</td>'
+        +'<td>'+esc(m.competitors||'—')+'</td>'
+        +'<td>'+oppHighBadge(m.dkOpportunity)+'</td>'
+        +'<td>'+esc(m.reason||'—')+'</td>'
+        +'</tr>';
+    }).join('');
+    setTable('⑤ 市场情报 · Market Intelligence（'+list.length+' 家）', ['客户','渠道','销售国家','主营产品','品牌','价格定位','竞品','D&K 机会','理由/策略'], rows);
+  }
+  function renderMgmt(){
+    var list = ACC().filter(searchFilter(['name','status','tier']));
+    var rows = list.map(function(a){
+      var s = scoreBreakdown(a);
+      return '<tr>'
+        +'<td><b>'+esc(a.name)+'</b></td>'
+        +'<td>'+tierBadge(a.tier)+'</td>'
+        +'<td>'+statusBadge2(a.status)+'</td>'
+        +'<td class="nowrap"><div class="score-seg"><span class="seg company" style="width:'+(s.company*1.2)+'px"></span><span class="seg match" style="width:'+(s.match*1.2)+'px"></span><span class="seg dev" style="width:'+(s.dev*1.2)+'px"></span></div><div class="score-num">'+s.total+'<small>/100</small></div></td>'
+        +'<td>'+esc(a.tags&&a.tags[0]?a.tags[0]:'—')+'</td>'
+        +'</tr>';
+    }).join('');
+    setTable('⑥ 客户维护 · Customer Management（评分=公司价值40 + 产品匹配30 + 开发可能性30）', ['客户','分级','状态','CRM 评分构成','标签'], rows);
+  }
+
+  var crmTab = 'accounts';
+  function setCRMTab(t){
+    crmTab = t;
+    document.querySelectorAll('#crmSubnav .subnav-item').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-crm')===t); });
+    renderCRMTab();
+  }
+  function renderCRMTab(){
+    var fns = { accounts:renderAccounts, contacts:renderContacts, pipeline:renderPipeline, activities:renderInteractions, intel:renderIntel, mgmt:renderMgmt };
+    (fns[crmTab]||renderAccounts)();
+  }
+
+  /* ---- 客户深度档案（开发中心页） ---- */
   function renderDev(){
-    const list = (window.SANGYI_DATA && window.SANGYI_DATA.customers && window.SANGYI_DATA.customers.length) ? window.SANGYI_DATA.customers : devData;
-    const html = list.map(c => `
-      <div class="dev-card">
-        <div class="dev-card-head">
-          <div class="dev-name">${c.name} <span class="badge-tag">${c.tag||''}</span></div>
-          <div class="dev-meta">${c.country||''}</div>
-        </div>
-        <div class="dev-divider"></div>
-        <div class="dev-row"><span class="k">地址</span><span class="v">${c.address||'—'}</span></div>
-        <div class="dev-row"><span class="k">电话</span><span class="v">${c.phone||'—'}</span></div>
-        <div class="dev-row"><span class="k">邮箱</span><span class="v">${c.email||'—'}</span></div>
-        <div class="dev-row"><span class="k">行业分类</span><span class="v">${c.industry||'—'}</span></div>
-        <div class="dev-row"><span class="k">买家类型</span><span class="v">${c.buyerType||'—'}</span></div>
-        <div class="dev-row"><span class="k">买家行为</span><span class="v">${c.buyerBehavior||'—'}</span></div>
-        <div class="dev-row">
-          <span class="k">关系标签</span>
-          <span class="v"><div class="dev-tags">${(c.tags||[]).map(t=>`<span class="dev-tag">${t}</span>`).join('')}</div></span>
-        </div>
-        <div style="display:flex;gap:8px;margin-top:14px;justify-content:flex-end">
-          <button class="btn btn-light btn-sm">查看邮件</button>
-          <button class="btn btn-light btn-sm">生成报价</button>
-          <button class="btn btn-primary btn-sm">编辑</button>
-        </div>
-      </div>
-    `).join('');
-    document.getElementById('devBody').innerHTML = html;
+    var list = ACC();
+    var html = list.map(function(a){
+      var s = scoreBreakdown(a);
+      var intel = INT().find(function(m){return m.accountId===a.accountId;})||{};
+      return '<div class="dev-card">'
+        +'<div class="dev-card-head"><div class="dev-name">'+esc(a.name)+' <span class="badge-tag">'+esc(a.tier||'')+'</span></div>'
+        +'<div class="dev-meta">'+esc(a.flag||'')+' '+esc(a.country)+' · '+esc(a.companyType||'')+'</div></div>'
+        +'<div class="dev-divider"></div>'
+        +'<div class="dev-row"><span class="k">公司全称</span><span class="v">'+esc(a.companyName||'—')+'</span></div>'
+        +'<div class="dev-row"><span class="k">来源</span><span class="v">'+esc(a.source||'—')+'</span></div>'
+        +'<div class="dev-row"><span class="k">主营产品</span><span class="v">'+esc(a.product||'—')+'</span></div>'
+        +'<div class="dev-row"><span class="k">仓库 / 渠道</span><span class="v">'+esc(a.warehouse||'—')+'</span></div>'
+        +'<div class="dev-row"><span class="k">状态</span><span class="v">'+statusBadge2(a.status)+'</span></div>'
+        +'<div class="dev-row"><span class="k">CRM 评分</span><span class="v"><b>'+s.total+'</b>/100 &nbsp;·&nbsp; 公司价值 '+s.company+' · 产品匹配 '+s.match+' · 开发可能性 '+s.dev+'</span></div>'
+        +'<div class="dev-row"><span class="k">市场情报</span><span class="v">'+esc(intel.reason||'—')+'</span></div>'
+        +'<div class="dev-row"><span class="k">关系标签</span><span class="v"><div class="dev-tags">'+(a.tags||[]).map(function(t){return '<span class="dev-tag">'+esc(t)+'</span>';}).join('')+'</div></span></div>'
+        +'</div>';
+    }).join('');
+    var el = document.getElementById('devBody');
+    if(el) el.innerHTML = html || '<div class="empty-state"><p>暂无客户档案</p></div>';
   }
 
 
@@ -2001,7 +2177,7 @@
       amtNote.textContent = parts.join(' · ');
     }
     // 工作数据页：从真实数据实时算累计值
-    const custN = (d.customers && d.customers.length) ? d.customers.length : 0;
+    const custN = (d.accounts && d.accounts.length) ? d.accounts.length : 0;
     const dealsN = ordList.filter(o => o.status !== '询盘' && o.amount != null).length;
     const inqN = ordList.filter(o => o.status === '询盘').length;
     const rateN = (dealsN + inqN) > 0 ? Math.round(dealsN / (dealsN + inqN) * 100) : 0;
@@ -2101,7 +2277,7 @@
         updateWaEngine();
         renderExpoCard(document.getElementById('expoCard'));
         renderExpoCard(document.getElementById('homeExpo'));
-        renderCRM();
+        renderCRMTab();
         renderDev();
         renderOrders();
         renderExpoCost();
@@ -2113,7 +2289,7 @@
   /* ============================================================
      Init
      ============================================================ */
-  renderCRM();
+  renderCRMTab();
   renderDev();
   renderOrders();
   renderExpoCost();

@@ -1,5 +1,5 @@
 {
-  "_说明": "桑怡工作台真实业务数据。改本文件并推送到 GitHub 即自动更新首页（无需改代码）。金额按订单币种分别记录：俄罗斯客户(编号RU)以人民币 CNY 结算，哥伦比亚(CO)/哥斯达黎加(CR)以美元 USD 结算（两类金额不混合累加）。customers 为客户主数据，status 可选 NEW/FREE/7-24/DEAL/LEAD/SAMPLE；orders 为订单列表（amount 为各订单最终 PI 总额）。国家由客户编号前缀推断：RU=俄罗斯 / CO=哥伦比亚 / CR=哥斯达黎加。",
+  "_说明": "桑怡工作台真实业务数据。改本文件并推送到 GitHub 即自动更新首页（无需改代码）。金额按订单币种分别记录：俄罗斯客户(编号RU)以人民币 CNY 结算，哥伦比亚(CO)/哥斯达黎加(CR)以美元 USD 结算。CRM 分为 5 张表：accounts(公司库/Tier/评分)、contacts(联系人)、opportunities(销售机会/9阶段)、activities(沟通记录)、marketIntel(市场情报)。",
   "updatedAt": "2026-08-02",
   "metrics": {
     "newCustomers": 3,
@@ -10,17 +10,89 @@
     "amount": 0
   },
   "today": [
-    { "title": "RU-291-5 第五单玻璃烟斗已发货，提单号稍后发出", "dot": "green", "meta": ["Stais-Alexander", "俄罗斯", "¥690,235"] },
-    { "title": "Juan 通过官网追加一批玻璃烟斗询盘，待报价", "dot": "blue", "meta": ["Juan", "哥斯达黎加", "新询盘"] },
-    { "title": "RAUL 巴拿马渠道批烟器 PI 已发送，等待确认", "dot": "blue", "meta": ["RAUL", "哥伦比亚", "$80,188"] },
-    { "title": "第四单（RU-291-4）退税资料待亚历山大确认", "dot": "amber", "meta": ["跟进", "俄罗斯", "¥405,844"] },
-    { "title": "Intertabac 宣传物料设计进行中（画册/名片/海报）", "dot": "purple", "meta": ["展会", "德国", "进度 27%"] }
+    {
+      "title": "RU-291-5 第五单玻璃烟斗已发货，提单号稍后发出",
+      "dot": "green",
+      "meta": [
+        "Stais-Alexander",
+        "俄罗斯",
+        "¥690,235"
+      ]
+    },
+    {
+      "title": "Juan 通过官网追加一批玻璃烟斗询盘，待报价",
+      "dot": "blue",
+      "meta": [
+        "Juan",
+        "哥斯达黎加",
+        "新询盘"
+      ]
+    },
+    {
+      "title": "RAUL 巴拿马渠道批烟器 PI 已发送，等待确认",
+      "dot": "blue",
+      "meta": [
+        "RAUL",
+        "哥伦比亚",
+        "$80,188"
+      ]
+    },
+    {
+      "title": "第四单（RU-291-4）退税资料待亚历山大确认",
+      "dot": "amber",
+      "meta": [
+        "跟进",
+        "俄罗斯",
+        "¥405,844"
+      ]
+    },
+    {
+      "title": "Intertabac 宣传物料设计进行中（画册/名片/海报）",
+      "dot": "purple",
+      "meta": [
+        "展会",
+        "德国",
+        "进度 27%"
+      ]
+    }
   ],
   "recent": [
-    { "title": "RU-291-4 第四单玻璃烟斗已发货", "dot": "green", "meta": ["Stais-Alexander", "2025-06-19", "¥405,844"] },
-    { "title": "CO-246-5 RAUL 玻璃烟斗已发货", "dot": "green", "meta": ["RAUL", "2025-08-20", "$18,761"] },
-    { "title": "CR-248-6 Juan 第六单玻璃烟斗已发货", "dot": "green", "meta": ["Juan", "2025-03-22", "$56,455"] },
-    { "title": "RU-291-5 第五单玻璃烟斗下单", "dot": "blue", "meta": ["Stais-Alexander", "2026-04-01", "¥690,235"] }
+    {
+      "title": "RU-291-4 第四单玻璃烟斗已发货",
+      "dot": "green",
+      "meta": [
+        "Stais-Alexander",
+        "2025-06-19",
+        "¥405,844"
+      ]
+    },
+    {
+      "title": "CO-246-5 RAUL 玻璃烟斗已发货",
+      "dot": "green",
+      "meta": [
+        "RAUL",
+        "2025-08-20",
+        "$18,761"
+      ]
+    },
+    {
+      "title": "CR-248-6 Juan 第六单玻璃烟斗已发货",
+      "dot": "green",
+      "meta": [
+        "Juan",
+        "2025-03-22",
+        "$56,455"
+      ]
+    },
+    {
+      "title": "RU-291-5 第五单玻璃烟斗下单",
+      "dot": "blue",
+      "meta": [
+        "Stais-Alexander",
+        "2026-04-01",
+        "¥690,235"
+      ]
+    }
   ],
   "expo": {
     "name": "Intertabac",
@@ -75,88 +147,48 @@
       }
     ],
     "costs": [
-      { "name": "展位费（9㎡ 标准展位）", "amount": 4500, "note": "Westfalenhallen · Intertabac" },
-      { "name": "国际机票（往返多特蒙德）", "amount": 1200, "note": "经济舱" },
-      { "name": "酒店住宿（4 晚）", "amount": 900, "note": "展会周边" },
-      { "name": "样品国际运输", "amount": 600, "note": "烟斗/磨烟器/水烟" },
-      { "name": "宣传物料印刷", "amount": 350, "note": "画册/名片/海报" },
-      { "name": "当地交通（租车/地铁）", "amount": 250, "note": "" },
-      { "name": "餐饮", "amount": 300, "note": "3 天展会期间" },
-      { "name": "签证 / 驾照翻译认证", "amount": 150, "note": "德国" }
+      {
+        "name": "展位费（9㎡ 标准展位）",
+        "amount": 4500,
+        "note": "Westfalenhallen · Intertabac"
+      },
+      {
+        "name": "国际机票（往返多特蒙德）",
+        "amount": 1200,
+        "note": "经济舱"
+      },
+      {
+        "name": "酒店住宿（4 晚）",
+        "amount": 900,
+        "note": "展会周边"
+      },
+      {
+        "name": "样品国际运输",
+        "amount": 600,
+        "note": "烟斗/磨烟器/水烟"
+      },
+      {
+        "name": "宣传物料印刷",
+        "amount": 350,
+        "note": "画册/名片/海报"
+      },
+      {
+        "name": "当地交通（租车/地铁）",
+        "amount": 250,
+        "note": ""
+      },
+      {
+        "name": "餐饮",
+        "amount": 300,
+        "note": "3 天展会期间"
+      },
+      {
+        "name": "签证 / 驾照翻译认证",
+        "amount": 150,
+        "note": "德国"
+      }
     ]
   },
-  "customers": [
-    {
-      "name": "Stais-Alexander",
-      "flag": "🇷🇺",
-      "country": "俄罗斯",
-      "addedBy": "桑怡",
-      "source": "复购客户 / 已成交",
-      "contact": "Stais Alexander",
-      "product": "玻璃烟斗 / 金属烟斗 / 磨烟器",
-      "status": "DEAL",
-      "date": "2023-05-19",
-      "tag": "老客户",
-      "address": "",
-      "phone": "",
-      "email": "",
-      "industry": "烟具批发",
-      "buyerType": "Wholesale Distributor",
-      "buyerBehavior": "多品类复购（玻璃 / 金属烟斗、研磨器），已成交 5 单+",
-      "tags": [
-        "RU-291",
-        "已成交 5 单+",
-        "玻璃烟斗 / 金属烟斗 / 磨烟器"
-      ]
-    },
-    {
-      "name": "RAUL",
-      "flag": "🇨🇴",
-      "country": "哥伦比亚",
-      "addedBy": "桑怡",
-      "source": "复购客户 / 已成交",
-      "contact": "RAUL",
-      "product": "玻璃烟斗 / 磨烟器 / blunt cigars",
-      "status": "DEAL",
-      "date": "2020-09-08",
-      "tag": "老客户",
-      "address": "",
-      "phone": "",
-      "email": "",
-      "industry": "烟具批发",
-      "buyerType": "Wholesale Distributor",
-      "buyerBehavior": "多品类 + 代理业务（含巴拿马渠道、样品单）",
-      "tags": [
-        "CO-246",
-        "已成交",
-        "玻璃烟斗 / 研磨器 / 雪茄",
-        "代理业务"
-      ]
-    },
-    {
-      "name": "Juan",
-      "flag": "🇨🇷",
-      "country": "哥斯达黎加",
-      "addedBy": "桑怡",
-      "source": "复购客户 / 已成交",
-      "contact": "Juan",
-      "product": "玻璃烟斗",
-      "status": "DEAL",
-      "date": "2020-07-08",
-      "tag": "老客户",
-      "address": "",
-      "phone": "",
-      "email": "",
-      "industry": "烟具批发",
-      "buyerType": "Wholesale Distributor",
-      "buyerBehavior": "长期复购，已成交 6 单（2020–2025）",
-      "tags": [
-        "CR-248",
-        "已成交 6 单",
-        "玻璃烟斗"
-      ]
-    }
-  ],
   "orders": [
     {
       "no": "RU-291-1",
@@ -401,6 +433,283 @@
       "text": "亚历山大：请确认第四单的退税资料是否齐全。",
       "time": "2026-07-20 10:15",
       "unread": true
+    }
+  ],
+  "accounts": [
+    {
+      "accountId": "RU-291",
+      "name": "Stais-Alexander",
+      "companyName": "Stais-Alexander LLC",
+      "flag": "🇷🇺",
+      "companyType": "Wholesale Distributor",
+      "country": "俄罗斯",
+      "region": "东欧",
+      "city": "Moscow",
+      "website": "",
+      "linkedin": "",
+      "foundedYear": "",
+      "employeeSize": "50-100",
+      "warehouse": "俄罗斯",
+      "businessModel": "Import + Distribution",
+      "tier": "Tier 1",
+      "score": 92,
+      "status": "Key Account",
+      "addedBy": "桑怡",
+      "source": "复购客户 / 已成交",
+      "contactName": "Stais Alexander",
+      "product": "玻璃烟斗 / 金属烟斗 / 磨烟器",
+      "date": "2023-05-19",
+      "tags": [
+        "RU-291",
+        "已成交 5 单+",
+        "玻璃烟斗 / 金属烟斗 / 磨烟器"
+      ]
+    },
+    {
+      "accountId": "CO-246",
+      "name": "RAUL",
+      "companyName": "RAUL Trading SAS",
+      "flag": "🇨🇴",
+      "companyType": "Wholesale Distributor",
+      "country": "哥伦比亚",
+      "region": "南美",
+      "city": "Bogotá",
+      "website": "",
+      "linkedin": "",
+      "foundedYear": "",
+      "employeeSize": "20-50",
+      "warehouse": "哥伦比亚 + 巴拿马渠道",
+      "businessModel": "Import + Distribution + Agency",
+      "tier": "Tier 1",
+      "score": 88,
+      "status": "Key Account",
+      "addedBy": "桑怡",
+      "source": "复购客户 / 已成交",
+      "contactName": "RAUL",
+      "product": "玻璃烟斗 / 磨烟器 / blunt cigars",
+      "date": "2020-09-08",
+      "tags": [
+        "CO-246",
+        "已成交",
+        "玻璃烟斗 / 研磨器 / 雪茄",
+        "代理业务"
+      ]
+    },
+    {
+      "accountId": "CR-248",
+      "name": "Juan",
+      "companyName": "Juan Imports SRL",
+      "flag": "🇨🇷",
+      "companyType": "Wholesale Distributor",
+      "country": "哥斯达黎加",
+      "region": "中美洲",
+      "city": "San José",
+      "website": "",
+      "linkedin": "",
+      "foundedYear": "",
+      "employeeSize": "10-20",
+      "warehouse": "哥斯达黎加",
+      "businessModel": "Import + Distribution",
+      "tier": "Tier 2",
+      "score": 76,
+      "status": "Active Customer",
+      "addedBy": "桑怡",
+      "source": "复购客户 / 已成交",
+      "contactName": "Juan",
+      "product": "玻璃烟斗",
+      "date": "2020-07-08",
+      "tags": [
+        "CR-248",
+        "已成交 6 单",
+        "玻璃烟斗"
+      ]
+    }
+  ],
+  "contacts": [
+    {
+      "contactId": "C-RU-291-1",
+      "accountId": "RU-291",
+      "name": "Stais Alexander",
+      "position": "Owner / CEO",
+      "department": "Purchasing",
+      "email": "",
+      "phone": "",
+      "whatsapp": "",
+      "linkedin": "",
+      "language": "Russian",
+      "decisionPower": "High",
+      "role": "Owner / CEO"
+    },
+    {
+      "contactId": "C-CO-246-1",
+      "accountId": "CO-246",
+      "name": "RAUL",
+      "position": "Owner / CEO",
+      "department": "Purchasing",
+      "email": "",
+      "phone": "",
+      "whatsapp": "",
+      "linkedin": "",
+      "language": "Spanish",
+      "decisionPower": "High",
+      "role": "Owner / CEO"
+    },
+    {
+      "contactId": "C-CO-246-2",
+      "accountId": "CO-246",
+      "name": "Carlos Mendez",
+      "position": "Purchasing Manager",
+      "department": "Purchasing",
+      "email": "",
+      "phone": "",
+      "whatsapp": "",
+      "linkedin": "",
+      "language": "Spanish",
+      "decisionPower": "Medium",
+      "role": "Purchasing Manager"
+    },
+    {
+      "contactId": "C-CR-248-1",
+      "accountId": "CR-248",
+      "name": "Juan",
+      "position": "Owner",
+      "department": "Purchasing",
+      "email": "",
+      "phone": "",
+      "whatsapp": "",
+      "linkedin": "",
+      "language": "Spanish",
+      "decisionPower": "High",
+      "role": "Owner"
+    }
+  ],
+  "opportunities": [
+    {
+      "oppId": "OP-2026-001",
+      "accountId": "RU-291",
+      "customer": "Stais-Alexander",
+      "products": "玻璃烟斗 / 金属烟斗",
+      "amount": 690235,
+      "currency": "CNY",
+      "stage": "Repeat Customer",
+      "probability": 95,
+      "expectedDate": "2026 Q4",
+      "nextAction": "确认第六单需求与交期",
+      "owner": "桑怡"
+    },
+    {
+      "oppId": "OP-2026-002",
+      "accountId": "CO-246",
+      "customer": "RAUL",
+      "products": "巴拿马渠道批烟器",
+      "amount": 80188,
+      "currency": "USD",
+      "stage": "Negotiation",
+      "probability": 70,
+      "expectedDate": "2026 Q3",
+      "nextAction": "跟进巴拿马渠道 PI 确认",
+      "owner": "桑怡"
+    },
+    {
+      "oppId": "OP-2026-003",
+      "accountId": "CR-248",
+      "customer": "Juan",
+      "products": "玻璃烟斗",
+      "amount": 56455,
+      "currency": "USD",
+      "stage": "Quotation Sent",
+      "probability": 60,
+      "expectedDate": "2026 Q3",
+      "nextAction": "发送新报价单",
+      "owner": "桑怡"
+    }
+  ],
+  "activities": [
+    {
+      "date": "2026-08-02",
+      "accountId": "RU-291",
+      "contact": "Stais Alexander",
+      "channel": "WhatsApp",
+      "content": "第五单玻璃烟斗已发货，提单号稍后发出",
+      "nextStep": "跟进第四单退税资料确认",
+      "followUp": "2026-08-10"
+    },
+    {
+      "date": "2026-08-01",
+      "accountId": "CR-248",
+      "contact": "Juan",
+      "channel": "Web",
+      "content": "通过官网追加一批玻璃烟斗询盘，待报价",
+      "nextStep": "制作报价单",
+      "followUp": "2026-08-05"
+    },
+    {
+      "date": "2026-07-29",
+      "accountId": "CO-246",
+      "contact": "RAUL",
+      "channel": "Email",
+      "content": "巴拿马渠道那批改烟器 PI 已发送",
+      "nextStep": "等待 RAUL 确认",
+      "followUp": "2026-08-03"
+    },
+    {
+      "date": "2026-07-20",
+      "accountId": "RU-291",
+      "contact": "Stais Alexander",
+      "channel": "Email",
+      "content": "确认第四单退税资料是否齐全",
+      "nextStep": "亚历山大确认资料",
+      "followUp": "2026-07-25"
+    },
+    {
+      "date": "2025-09-15",
+      "accountId": "CO-246",
+      "contact": "RAUL",
+      "channel": "Exhibition",
+      "content": "Intertabac 现场拜访（计划）",
+      "nextStep": "预约展会面谈",
+      "followUp": "2026-09-15"
+    }
+  ],
+  "marketIntel": [
+    {
+      "accountId": "RU-291",
+      "company": "Stais-Alexander LLC",
+      "channels": "Headshop / 线上批发",
+      "countries": "俄罗斯",
+      "brands": "自有品牌",
+      "products": "玻璃烟斗 / 金属烟斗 / 研磨器",
+      "priceTier": "中高",
+      "customerGroup": "批发商 / 终端零售",
+      "competitors": "Unknown",
+      "dkOpportunity": "High",
+      "reason": "多品类复购，需持续供货与款式更新"
+    },
+    {
+      "accountId": "CO-246",
+      "company": "RAUL Trading SAS",
+      "channels": "Headshop / 代理渠道",
+      "countries": "哥伦比亚 + 巴拿马",
+      "brands": "—",
+      "products": "玻璃烟斗 / 研磨器 / 雪茄",
+      "priceTier": "中",
+      "customerGroup": "批发商 / 代理",
+      "competitors": "Unknown",
+      "dkOpportunity": "High",
+      "reason": "巴拿马渠道待开发，需 OEM 能力"
+    },
+    {
+      "accountId": "CR-248",
+      "company": "Juan Imports SRL",
+      "channels": "Headshop",
+      "countries": "哥斯达黎加",
+      "brands": "—",
+      "products": "玻璃烟斗",
+      "priceTier": "中",
+      "customerGroup": "批发商",
+      "competitors": "Unknown",
+      "dkOpportunity": "Medium",
+      "reason": "长期复购但品类单一，可拓品类"
     }
   ]
 }

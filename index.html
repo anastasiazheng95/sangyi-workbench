@@ -245,6 +245,8 @@
   }
   .metric-label { font-size: 12.5px; color: var(--text-3); margin-bottom: 6px; }
   .metric-value { font-size: 24px; font-weight: 700; color: var(--text-1); }
+  .metric-value .amt-line { font-size: 18px; line-height: 1.45; font-weight: 700; color: var(--text-1); }
+  .metric-value .amt-line .cur { color: var(--text-3); font-weight: 600; margin-right: 2px; }
   .metric-value .unit { font-size: 13px; color: var(--text-3); margin-left: 4px; font-weight: 500; }
   .metric-icon {
     position: absolute; right: 14px; top: 14px;
@@ -1897,7 +1899,14 @@
     setText('mv-messages', m.messages ? m.messages : '—');
     setText('mv-followups', m.followups ? m.followups : '—');
     setText('mv-newOrders', m.newOrders ? m.newOrders : '—');
-    setText('mv-amount', m.amount ? ('$'+Number(m.amount).toLocaleString('en-US')) : '—');
+    // 成交金额：按币种分两行显示（人民币 / 美元），从订单实时汇总
+    const ordList = (d.orders && d.orders.length) ? d.orders : [];
+    let cnySum = 0, usdSum = 0;
+    ordList.forEach(o => { const a = o.amount || 0; if (o.currency === 'CNY') cnySum += a; else usdSum += a; });
+    let amtHtml = '';
+    if (cnySum > 0) amtHtml += '<div class="amt-line"><span class="cur">¥</span>' + Number(cnySum).toLocaleString('en-US') + '</div>';
+    if (usdSum > 0) amtHtml += '<div class="amt-line"><span class="cur">$</span>' + Number(usdSum).toLocaleString('en-US') + '</div>';
+    document.getElementById('mv-amount').innerHTML = amtHtml || '—';
     renderActivities('todayList', d.today);
     renderActivities('recentList', d.recent);
   }

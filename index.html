@@ -1454,7 +1454,7 @@
         <td><b>${o.customer}</b></td>
         <td>${o.product}</td>
         <td>${o.qty}</td>
-        <td>${o.amount!=null ? '$'+Number(o.amount).toLocaleString('en-US') : '—'}</td>
+        <td>${o.amount!=null ? (o.currency==='CNY'?'¥':'$')+Number(o.amount).toLocaleString('en-US') : '—'}</td>
         <td><span class="status-badge status-${o.cls||'NEW'}">${o.status}</span></td>
         <td>${o.date}</td>
       </tr>`).join('');

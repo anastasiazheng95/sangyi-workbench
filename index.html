@@ -2127,6 +2127,12 @@
 
   /* ---- PWA Service Worker ---- */
   if ('serviceWorker' in navigator){
+    let swReloading = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (swReloading) return;
+      swReloading = true;
+      location.reload();
+    });
     window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(e => console.warn('SW 注册失败', e)));
   }
 </script>

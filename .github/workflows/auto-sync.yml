@@ -22,7 +22,14 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+
       - name: 运行数据同步
+        env:
+          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+          WHATSAPP_FROM: ${{ secrets.WHATSAPP_FROM }}
         run: python sync.py
 
       - name: 提交变更（如有）

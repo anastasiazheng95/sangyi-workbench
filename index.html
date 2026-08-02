@@ -247,6 +247,7 @@
   .metric-value { font-size: 24px; font-weight: 700; color: var(--text-1); }
   .metric-value .amt-line { font-size: 18px; line-height: 1.45; font-weight: 700; color: var(--text-1); }
   .metric-value .amt-line .cur { color: var(--text-3); font-weight: 600; margin-right: 2px; }
+  .metric-sub { font-size: 11px; color: var(--text-3); margin-top: 4px; line-height: 1.3; font-weight: 500; }
   /* ===== 收件箱 inbox ===== */
   .inbox-toolbar { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:14px; }
   .inbox-filters { display:flex; gap:8px; flex-wrap:wrap; }
@@ -863,6 +864,7 @@
             <div class="metric-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18"/><circle cx="16.5" cy="14.5" r="1.2"/></svg></div>
             <div class="metric-label">成交金额</div>
             <div class="metric-value" id="mv-amount">—</div>
+            <div class="metric-sub" id="mv-amount-note"></div>
           </div>
         </div>
 
@@ -1486,7 +1488,7 @@
         <td>${o.qty}</td>
         <td>${o.amount!=null ? (o.currency==='CNY'?'¥':'$')+Number(o.amount).toLocaleString('en-US') : '—'}</td>
         <td><span class="status-badge status-${o.cls||'NEW'}">${o.status}</span></td>
-        <td>${o.date}</td>
+        <td>${o.date || '—'}</td>
       </tr>`).join('');
     const tb = document.getElementById('ordersBody');
     if(tb) tb.innerHTML = html;
@@ -1948,6 +1950,13 @@
     document.getElementById('mv-amount').innerHTML = amtHtml || '—';
     const workAmt = document.getElementById('mv-work-amount');
     if (workAmt) workAmt.innerHTML = amtHtml || '—';
+    const amtNote = document.getElementById('mv-amount-note');
+    if (amtNote) {
+      const parts = [];
+      if (cnySum > 0) parts.push('¥ 俄罗斯');
+      if (usdSum > 0) parts.push('$ 哥伦比亚/哥斯达黎加');
+      amtNote.textContent = parts.join(' · ');
+    }
     // 工作数据页：从真实数据实时算累计值
     const custN = (d.customers && d.customers.length) ? d.customers.length : 0;
     const dealsN = ordList.filter(o => o.status !== '询盘' && o.amount != null).length;
@@ -1958,7 +1967,18 @@
     const rateEl = document.getElementById('mv-wc-rate');
     if (rateEl) rateEl.innerHTML = rateN + '<span class="unit">%</span>';
     renderActivities('todayList', d.today);
-    renderActivities('recentList', d.recent);
+    renderActivities('recentList', (d.recent && d.recent.length) ? d.recent : buildRecentFromOrders(d));
+  }
+
+  function buildRecentFromOrders(d){
+    const ord = (d.orders || []).filter(o => o.date && o.date !== '—')
+      .slice().sort((a,b) => (b.date||'').localeCompare(a.date||''))
+      .slice(0, 5);
+    return ord.map(o => ({
+      title: o.no + ' · ' + o.customer + ' · ' + (o.product || ''),
+      meta: [ (o.currency === 'CNY' ? '¥' : '$') + Number(o.amount || 0).toLocaleString('en-US'), o.status ],
+      dot: ''
+    }));
   }
 
   /* ---- 收件箱 / 客户留言（按渠道聚合） ---- */

@@ -18,69 +18,313 @@
     "start": "2026-09-15",
     "progress": 27,
     "tasks": [
-      { "name": "展位预订 / 展位图确认", "status": "done" },
-      { "name": "样品准备（烟斗 / 磨烟器 / 水烟）", "status": "done" },
-      { "name": "宣传物料设计（画册 / 名片 / 海报）", "status": "run" },
-      { "name": "客户邀约（老客户 + 海外买家）", "status": "run" },
-      { "name": "行程安排", "status": "todo" },
-      { "name": "机票预订", "status": "todo" },
-      { "name": "酒店预订", "status": "todo" },
-      { "name": "签证办理", "status": "todo" },
-      { "name": "德国认证驾照翻译", "status": "todo" },
-      { "name": "租车", "status": "todo" },
-      { "name": "现场执行方案", "status": "todo" }
+      {
+        "name": "展位预订 / 展位图确认",
+        "status": "done"
+      },
+      {
+        "name": "样品准备（烟斗 / 磨烟器 / 水烟）",
+        "status": "done"
+      },
+      {
+        "name": "宣传物料设计（画册 / 名片 / 海报）",
+        "status": "run"
+      },
+      {
+        "name": "客户邀约（老客户 + 海外买家）",
+        "status": "run"
+      },
+      {
+        "name": "行程安排",
+        "status": "todo"
+      },
+      {
+        "name": "机票预订",
+        "status": "todo"
+      },
+      {
+        "name": "酒店预订",
+        "status": "todo"
+      },
+      {
+        "name": "签证办理",
+        "status": "todo"
+      },
+      {
+        "name": "德国认证驾照翻译",
+        "status": "todo"
+      },
+      {
+        "name": "租车",
+        "status": "todo"
+      },
+      {
+        "name": "现场执行方案",
+        "status": "todo"
+      }
     ],
     "costs": []
   },
   "customers": [
     {
-      "name": "Stais-Alexander", "flag": "🇷🇺", "country": "俄罗斯",
-      "addedBy": "桑怡", "source": "复购客户 / 已成交", "contact": "Stais Alexander",
-      "product": "玻璃烟斗 / 金属烟斗 / 磨烟器", "status": "DEAL", "date": "2023-05-19",
-      "tag": "老客户", "address": "", "phone": "", "email": "",
-      "industry": "烟具批发", "buyerType": "Wholesale Distributor",
+      "name": "Stais-Alexander",
+      "flag": "🇷🇺",
+      "country": "俄罗斯",
+      "addedBy": "桑怡",
+      "source": "复购客户 / 已成交",
+      "contact": "Stais Alexander",
+      "product": "玻璃烟斗 / 金属烟斗 / 磨烟器",
+      "status": "DEAL",
+      "date": "2023-05-19",
+      "tag": "老客户",
+      "address": "",
+      "phone": "",
+      "email": "",
+      "industry": "烟具批发",
+      "buyerType": "Wholesale Distributor",
       "buyerBehavior": "多品类复购（玻璃 / 金属烟斗、研磨器），已成交 5 单+",
-      "tags": ["RU-291", "已成交 5 单+", "玻璃烟斗 / 金属烟斗 / 磨烟器"]
+      "tags": [
+        "RU-291",
+        "已成交 5 单+",
+        "玻璃烟斗 / 金属烟斗 / 磨烟器"
+      ]
     },
     {
-      "name": "RAUL", "flag": "🇨🇴", "country": "哥伦比亚",
-      "addedBy": "桑怡", "source": "复购客户 / 已成交", "contact": "RAUL",
-      "product": "玻璃烟斗 / 磨烟器 / blunt cigars", "status": "DEAL", "date": "2020-09-08",
-      "tag": "老客户", "address": "", "phone": "", "email": "",
-      "industry": "烟具批发", "buyerType": "Wholesale Distributor",
+      "name": "RAUL",
+      "flag": "🇨🇴",
+      "country": "哥伦比亚",
+      "addedBy": "桑怡",
+      "source": "复购客户 / 已成交",
+      "contact": "RAUL",
+      "product": "玻璃烟斗 / 磨烟器 / blunt cigars",
+      "status": "DEAL",
+      "date": "2020-09-08",
+      "tag": "老客户",
+      "address": "",
+      "phone": "",
+      "email": "",
+      "industry": "烟具批发",
+      "buyerType": "Wholesale Distributor",
       "buyerBehavior": "多品类 + 代理业务（含巴拿马渠道、样品单）",
-      "tags": ["CO-246", "已成交", "玻璃烟斗 / 研磨器 / 雪茄", "代理业务"]
+      "tags": [
+        "CO-246",
+        "已成交",
+        "玻璃烟斗 / 研磨器 / 雪茄",
+        "代理业务"
+      ]
     },
     {
-      "name": "Juan", "flag": "🇨🇷", "country": "哥斯达黎加",
-      "addedBy": "桑怡", "source": "复购客户 / 已成交", "contact": "Juan",
-      "product": "玻璃烟斗", "status": "DEAL", "date": "2020-07-08",
-      "tag": "老客户", "address": "", "phone": "", "email": "",
-      "industry": "烟具批发", "buyerType": "Wholesale Distributor",
+      "name": "Juan",
+      "flag": "🇨🇷",
+      "country": "哥斯达黎加",
+      "addedBy": "桑怡",
+      "source": "复购客户 / 已成交",
+      "contact": "Juan",
+      "product": "玻璃烟斗",
+      "status": "DEAL",
+      "date": "2020-07-08",
+      "tag": "老客户",
+      "address": "",
+      "phone": "",
+      "email": "",
+      "industry": "烟具批发",
+      "buyerType": "Wholesale Distributor",
       "buyerBehavior": "长期复购，已成交 6 单（2020–2025）",
-      "tags": ["CR-248", "已成交 6 单", "玻璃烟斗"]
+      "tags": [
+        "CR-248",
+        "已成交 6 单",
+        "玻璃烟斗"
+      ]
     }
   ],
   "orders": [
-    { "no": "RU-291-1", "customer": "Stais-Alexander", "product": "玻璃烟斗", "qty": "—", "amount": 311544, "status": "已发货", "cls": "7-24", "date": "2023-05-19" },
-    { "no": "RU-291-2", "customer": "Stais-Alexander", "product": "金属烟斗", "qty": "—", "amount": 340018, "status": "已发货", "cls": "7-24", "date": "" },
-    { "no": "RU-291-3", "customer": "Stais-Alexander", "product": "第三单", "qty": "—", "amount": 205720, "status": "已发货", "cls": "7-24", "date": "" },
-    { "no": "RU-291-4", "customer": "Stais-Alexander", "product": "第四单", "qty": "—", "amount": 405844, "status": "已发货", "cls": "7-24", "date": "" },
-    { "no": "RU-291-5", "customer": "Stais-Alexander", "product": "第五单", "qty": "—", "amount": 690235, "status": "已发货", "cls": "7-24", "date": "" },
-
-    { "no": "CR-248-1", "customer": "Juan", "product": "玻璃烟斗", "qty": "—", "amount": 25156, "status": "已发货", "cls": "7-24", "date": "2020" },
-    { "no": "CR-248-2", "customer": "Juan", "product": "玻璃烟斗", "qty": "—", "amount": 5760, "status": "已发货", "cls": "7-24", "date": "" },
-    { "no": "CR-248-3", "customer": "Juan", "product": "玻璃烟斗", "qty": "—", "amount": 42234, "status": "已发货", "cls": "7-24", "date": "2021-04-28" },
-    { "no": "CR-248-4", "customer": "Juan", "product": "玻璃烟斗", "qty": "—", "amount": 56952, "status": "已发货", "cls": "7-24", "date": "2022-03-18" },
-    { "no": "CR-248-5", "customer": "Juan", "product": "玻璃烟斗", "qty": "—", "amount": 9166, "status": "已发货", "cls": "7-24", "date": "2023-08-19" },
-    { "no": "CR-248-6", "customer": "Juan", "product": "玻璃烟斗", "qty": "—", "amount": 56455, "status": "已发货", "cls": "7-24", "date": "2025-03-22" },
-
-    { "no": "CO-246-1", "customer": "RAUL", "product": "玻璃烟斗 / 研磨器", "qty": "—", "amount": 11654, "status": "已发货", "cls": "7-24", "date": "" },
-    { "no": "CO-246-2", "customer": "RAUL", "product": "blunt cigars", "qty": "—", "amount": 11616, "status": "已发货", "cls": "7-24", "date": "" },
-    { "no": "CO-246-3", "customer": "RAUL", "product": "样品单", "qty": "—", "amount": 2378, "status": "样品", "cls": "NEW", "date": "" },
-    { "no": "CO-246-4", "customer": "RAUL", "product": "巴拿马渠道", "qty": "—", "amount": 80188, "status": "已发货", "cls": "7-24", "date": "" },
-    { "no": "CO-246-5", "customer": "RAUL", "product": "玻璃烟斗", "qty": "—", "amount": 18761, "status": "已发货", "cls": "7-24", "date": "2025-08-20" },
-    { "no": "CO-246-6", "customer": "RAUL", "product": "玻璃烟斗 / 研磨器", "qty": "—", "amount": null, "status": "询盘", "cls": "LEAD", "date": "2025-07-05" }
+    {
+      "no": "RU-291-1",
+      "customer": "Stais-Alexander",
+      "product": "玻璃烟斗",
+      "qty": "—",
+      "amount": 311544,
+      "status": "已发货",
+      "cls": "7-24",
+      "date": "2023-05-19",
+      "currency": "CNY"
+    },
+    {
+      "no": "RU-291-2",
+      "customer": "Stais-Alexander",
+      "product": "金属烟斗",
+      "qty": "—",
+      "amount": 340018,
+      "status": "已发货",
+      "cls": "7-24",
+      "date": "",
+      "currency": "CNY"
+    },
+    {
+      "no": "RU-291-3",
+      "customer": "Stais-Alexander",
+      "product": "第三单",
+      "qty": "—",
+      "amount": 205720,
+      "status": "已发货",
+      "cls": "7-24",
+      "date": "",
+      "currency": "CNY"
+    },
+    {
+      "no": "RU-291-4",
+      "customer": "Stais-Alexander",
+      "product": "第四单",
+      "qty": "—",
+      "amount": 405844,
+      "status": "已发货",
+      "cls": "7-24",
+      "date": "",
+      "currency": "CNY"
+    },
+    {
+      "no": "RU-291-5",
+      "customer": "Stais-Alexander",
+      "product": "第五单",
+      "qty": "—",
+      "amount": 690235,
+      "status": "已发货",
+      "cls": "7-24",
+      "date": "",
+      "currency": "CNY"
+    },
+    {
+      "no": "CR-248-1",
+      "customer": "Juan",
+      "product": "玻璃烟斗",
+      "qty": "—",
+      "amount": 25156,
+      "status": "已发货",
+      "cls": "7-24",
+      "date": "2020",
+      "currency": "USD"
+    },
+    {
+      "no": "CR-248-2",
+      "customer": "Juan",
+      "product": "玻璃烟斗",
+      "qty": "—",
+      "amount": 5760,
+      "status": "已发货",
+      "cls": "7-24",
+      "date": "",
+      "currency": "USD"
+    },
+    {
+      "no": "CR-248-3",
+      "customer": "Juan",
+      "product": "玻璃烟斗",
+      "qty": "—",
+      "amount": 42234,
+      "status": "已发货",
+      "cls": "7-24",
+      "date": "2021-04-28",
+      "currency": "USD"
+    },
+    {
+      "no": "CR-248-4",
+      "customer": "Juan",
+      "product": "玻璃烟斗",
+      "qty": "—",
+      "amount": 56952,
+      "status": "已发货",
+      "cls": "7-24",
+      "date": "2022-03-18",
+      "currency": "USD"
+    },
+    {
+      "no": "CR-248-5",
+      "customer": "Juan",
+      "product": "玻璃烟斗",
+      "qty": "—",
+      "amount": 9166,
+      "status": "已发货",
+      "cls": "7-24",
+      "date": "2023-08-19",
+      "currency": "USD"
+    },
+    {
+      "no": "CR-248-6",
+      "customer": "Juan",
+      "product": "玻璃烟斗",
+      "qty": "—",
+      "amount": 56455,
+      "status": "已发货",
+      "cls": "7-24",
+      "date": "2025-03-22",
+      "currency": "USD"
+    },
+    {
+      "no": "CO-246-1",
+      "customer": "RAUL",
+      "product": "玻璃烟斗 / 研磨器",
+      "qty": "—",
+      "amount": 11654,
+      "status": "已发货",
+      "cls": "7-24",
+      "date": "",
+      "currency": "USD"
+    },
+    {
+      "no": "CO-246-2",
+      "customer": "RAUL",
+      "product": "blunt cigars",
+      "qty": "—",
+      "amount": 11616,
+      "status": "已发货",
+      "cls": "7-24",
+      "date": "",
+      "currency": "USD"
+    },
+    {
+      "no": "CO-246-3",
+      "customer": "RAUL",
+      "product": "样品单",
+      "qty": "—",
+      "amount": 2378,
+      "status": "样品",
+      "cls": "NEW",
+      "date": "",
+      "currency": "USD"
+    },
+    {
+      "no": "CO-246-4",
+      "customer": "RAUL",
+      "product": "巴拿马渠道",
+      "qty": "—",
+      "amount": 80188,
+      "status": "已发货",
+      "cls": "7-24",
+      "date": "",
+      "currency": "USD"
+    },
+    {
+      "no": "CO-246-5",
+      "customer": "RAUL",
+      "product": "玻璃烟斗",
+      "qty": "—",
+      "amount": 18761,
+      "status": "已发货",
+      "cls": "7-24",
+      "date": "2025-08-20",
+      "currency": "USD"
+    },
+    {
+      "no": "CO-246-6",
+      "customer": "RAUL",
+      "product": "玻璃烟斗 / 研磨器",
+      "qty": "—",
+      "amount": null,
+      "status": "询盘",
+      "cls": "LEAD",
+      "date": "2025-07-05",
+      "currency": "USD"
+    }
   ],
   "zoho": {
     "messages": []

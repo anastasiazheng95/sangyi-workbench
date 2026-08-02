@@ -332,5 +332,55 @@
   "whatsapp": {
     "connected": false,
     "messages": []
-  }
+  },
+  "inbox": [
+    {
+      "id": "m1",
+      "channel": "whatsapp",
+      "customer": "Stais-Alexander",
+      "text": "亚历山大，第五单玻璃烟斗已发货，提单号稍后发你。",
+      "time": "2026-07-30 14:20",
+      "unread": true
+    },
+    {
+      "id": "m2",
+      "channel": "email",
+      "customer": "RAUL",
+      "text": "Hi Raul, 巴拿马渠道那批改烟器 PI 已附上，请查收。",
+      "time": "2026-07-29 09:05",
+      "unread": true
+    },
+    {
+      "id": "m3",
+      "channel": "web",
+      "customer": "Juan",
+      "text": "Juan 通过官网询盘：想追加一批玻璃烟斗，请报价。",
+      "time": "2026-07-28 21:40",
+      "unread": false
+    },
+    {
+      "id": "m4",
+      "channel": "zoho",
+      "customer": "RAUL",
+      "text": "Zoho：RAUL 的样品单已标记发货。",
+      "time": "2026-07-25 16:10",
+      "unread": false
+    },
+    {
+      "id": "m5",
+      "channel": "whatsapp",
+      "customer": "Juan",
+      "text": "Juan：第六单的 packing list 收到，谢谢！",
+      "time": "2026-07-22 11:30",
+      "unread": false
+    },
+    {
+      "id": "m6",
+      "channel": "email",
+      "customer": "Stais-Alexander",
+      "text": "亚历山大：请确认第四单的退税资料是否齐全。",
+      "time": "2026-07-20 10:15",
+      "unread": true
+    }
+  ]
 }

@@ -1,6 +1,6 @@
 {
   "_说明": "桑怡工作台真实业务数据。改本文件并推送到 GitHub 即自动更新首页（无需改代码）。金额按订单币种分别记录：俄罗斯客户(编号RU)以人民币 CNY 结算，哥伦比亚(CO)/哥斯达黎加(CR)以美元 USD 结算。CRM 分为 5 张表：accounts(公司库/Tier/评分)、contacts(联系人)、opportunities(销售机会/9阶段)、activities(沟通记录)、marketIntel(市场情报)。",
-  "updatedAt": "2026-08-10",
+  "updatedAt": "2026-08-11",
   "metrics": {
     "newCustomers": 3,
     "newQuotes": 17,
@@ -188,7 +188,7 @@
         "note": "德国"
       }
     ],
-    "daysLeft": 36
+    "daysLeft": 35
   },
   "orders": [
     {
